@@ -1,9 +1,9 @@
-export class Questions {
+export class Question {
   constructor(options) {
-    this.id = options.id;
-    this.title = options.title;
-    this.type = options.type;
-    this.rank = options.rank;
-    this.answer = options.answer;
+    this.id = options.id; //string
+    this.title = options.title; //string
+    this.type = options.type; //string
+    this.rank = options.rank; //string
+    this.answer = options.answer; //Array<Answer>
   }
 }
