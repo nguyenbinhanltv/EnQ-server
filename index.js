@@ -16,6 +16,7 @@ const testExamHistorysRouter = require('./routers/testExamHistorys.router');
 const questionRouter = require('./routers/questions.router');
 const answersRouter = require('./routers/answers.router');
 const testExamsRouter = require('./routers/testExams.router');
+const leadersRouter = require('./routers/leaders.router');
 
 const app = express();
 const port = 3000;
@@ -29,6 +30,7 @@ app.use('/test-exam-history', testExamHistorysRouter);
 app.use('/questions', questionRouter);
 app.use('/answers', answersRouter);
 app.use('/test-exam', testExamsRouter);
+app.use('/leaders', leadersRouter);
 
 
 app.listen(port, () => {
