@@ -13,6 +13,7 @@ admin.initializeApp({
 //Router
 const userRouter = require('./routers/user.router');
 const testExamHistoryRouter = require('./routers/testExamHistory.router');
+const questionRouter = require('./routers/question.router');
 
 const app = express();
 const port = 3000;
@@ -23,6 +24,7 @@ app.use(bodyParser.json());
 //API
 app.use('/user', userRouter);
 app.use('/test-exam-history', testExamHistoryRouter);
+app.use('/questions', questionRouter);
 
 app.listen(port, () => {
   console.log('App running at port ' + port);
