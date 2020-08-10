@@ -11,9 +11,9 @@ admin.initializeApp({
 });
 
 //Router
-const userRouter = require('./routers/user.router');
-const testExamHistoryRouter = require('./routers/testExamHistory.router');
-const questionRouter = require('./routers/question.router');
+const userRouter = require('./routers/users.router');
+const testExamHistoryRouter = require('./routers/testExamHistorys.router');
+const questionRouter = require('./routers/questions.router');
 
 const app = express();
 const port = 3000;
