@@ -15,3 +15,7 @@ module.exports.getAnswer = (req, res) => {
   .then(doc => res.status(200).send(doc))
   .catch(err => res.status(400).send(err));
 }
+
+module.exports.getAnswers = (req, res) => {
+  
+}

@@ -16,6 +16,10 @@ module.exports.getQuestion = (req, res) => {
   .catch(err => res.status(400).send(err));
 }
 
+module.exports.getQuestions = (req, res) => {
+  
+}
+
 module.exports.addQuestion = (req, res) => {
   let data = new model.Question(req.body);
   firebaseHelper

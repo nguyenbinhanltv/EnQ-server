@@ -13,6 +13,10 @@ module.exports.getUser = (req, res) => {
   .catch(err => res.status(400).send(err));
 }
 
+module.exports.getUsers = (req, res) => {
+  
+}
+
 module.exports.updateUser = (req, res) => {
   const data = req.body;
   firebaseHelper

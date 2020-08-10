@@ -17,6 +17,10 @@ module.exports.getTestExamHistory = (req, res) => {
     .catch(err => res.status(400).send(err));
 }
 
+module.exports.getTestExamHistorys = (req, res) => {
+  
+}
+
 module.exports.addTestExamHistory = (req, res) => {
     let data = new model.TestExamHistory(req.body);
     firebaseHelper
