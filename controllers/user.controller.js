@@ -5,7 +5,7 @@ const db = admin.firestore();
 const collectionName = 'users';
 
 module.exports.getUser = (req, res) => {
-  const userId = req.param.userId;
+  const userId = req.params.userId;
   firebaseHelper
   .firestore
   .getDocument(db, collectionName, userId)
@@ -18,6 +18,6 @@ module.exports.updateUser = (req, res) => {
   firebaseHelper
   .firestore
   .updateDocument(db, collectionName, data.id, data)
-  .then(doc => res.status(200).send('Update user data sucessfully !!!'))
+  .then(doc => res.status(200).send(`Update user data ${data.id} sucessfully !!!`))
   .catch(err => res.status(400).send(err));
 }
