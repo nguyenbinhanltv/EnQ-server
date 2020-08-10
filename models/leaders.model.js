@@ -1,4 +1,4 @@
-export class Leaders {
+class Leaders {
   constructor(options) {
     this.id = options.id; //string
     this.userId = options.userId; //Array<User.id>
@@ -6,3 +6,5 @@ export class Leaders {
     this.endAt = options.endAt; //string
   }
 }
+
+module.exports.Leaders = Leaders;

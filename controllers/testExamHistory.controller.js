@@ -1,11 +1,15 @@
 const admin = require('firebase-admin');
 const firebaseHelper = require('firebase-functions-helper/dist');
 
+//Model
+const model = require('../models/testExamHistory.model');
+
 const db = admin.firestore();
 const collectionName = 'test-exam-history';
 
 module.exports.getTestExamHistory = (req, res) => {
     const testExamHistoryId = req.params.testExamHistoryId;
+    console.log(testExamHistoryId);
     firebaseHelper
     .firestore
     .getDocument(db, collectionName, testExamHistoryId)
@@ -14,7 +18,7 @@ module.exports.getTestExamHistory = (req, res) => {
 }
 
 module.exports.addTestExamHistory = (req, res) => {
-    let data = req.body;
+    let data = new model.TestExamHistory(req.body);
     firebaseHelper
     .firestore
     .createNewDocument(db, collectionName, data)

@@ -3,7 +3,7 @@ const controller = require('../controllers/testExamHistory.controller');
 
 const router = express.Router();
 
-router.get('/:testExamHistoryId', controller.addTestExamHistory);
+router.get('/:testExamHistoryId', controller.getTestExamHistory);
 router.post('/', controller.addTestExamHistory);
 
 

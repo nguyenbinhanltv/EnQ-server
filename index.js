@@ -11,7 +11,8 @@ admin.initializeApp({
 });
 
 //Router
-const userRouter = require('./routers/user.router.js');
+const userRouter = require('./routers/user.router');
+const testExamHistoryRouter = require('./routers/testExamHistory.router');
 
 const app = express();
 const port = 3000;
@@ -19,7 +20,9 @@ const port = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
+//API
 app.use('/user', userRouter);
+app.use('/test-exam-history', testExamHistoryRouter);
 
 app.listen(port, () => {
   console.log('App running at port ' + port);

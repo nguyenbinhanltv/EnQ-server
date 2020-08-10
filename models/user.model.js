@@ -1,4 +1,4 @@
-export class User {
+class User {
   constructor(options) {
     this.userName = options.userName; //string
     this.id = options.id; //string
@@ -8,3 +8,5 @@ export class User {
     this.testHistory = options.testHistory; // Array<TestExamHistory.id> (<=5)
   }
 }
+
+module.exports.User = User;
