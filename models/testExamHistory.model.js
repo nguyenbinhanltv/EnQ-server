@@ -4,6 +4,6 @@ export class TestExamHistory {
     this.timeStart = options.timeStart; //string
     this.timeEnd = options.timeEnd; //string
     this.testExamId = options.testExamId; //string
-    this.reviewAnswer = options.reviewAnswer; //string
+    this.answers = options.answers; //Array<Enum<A, B, C, D>>
   }
 }

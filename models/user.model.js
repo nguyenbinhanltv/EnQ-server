@@ -5,6 +5,6 @@ export class User {
     this.photoURL = options.photoURL; //string
     this.rank = options.rank; //string
     this.point = options.point; //string
-    this.testHistory = options.testHistory; // Array<TestExamHistory> (<=5)
+    this.testHistory = options.testHistory; // Array<TestExamHistory.id> (<=5)
   }
 }

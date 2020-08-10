@@ -4,6 +4,6 @@ export class Question {
     this.title = options.title; //string
     this.type = options.type; //string
     this.rank = options.rank; //string
-    this.answer = options.answer; //Array<Answer>
+    this.answer = options.answer; //Array<Answer.id>
   }
 }
