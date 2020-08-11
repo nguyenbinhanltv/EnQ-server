@@ -3,10 +3,15 @@ info:
   title: Question
   version: '1.0'
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'http://localhost:3000/questions'
 paths:
-  /questions:
-    parameters: []
+  '/{questionId}':
+    parameters:
+      - schema:
+          type: string
+        name: questionId
+        in: path
+        required: true
     get:
       summary: getQuestion
       tags: []
@@ -49,12 +54,7 @@ paths:
         '400':
           description: Bad Request
       operationId: get-questions-questionId
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: questionId
-          required: true
+      parameters: []
     post:
       summary: addQuestion
       tags: []

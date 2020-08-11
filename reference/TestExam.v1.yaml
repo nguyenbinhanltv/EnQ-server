@@ -3,9 +3,9 @@ info:
   title: TestExam
   version: '1.0'
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'http://localhost:3000/test-exam'
 paths:
-  '/test-exam/{testExamId}':
+  '/{testExamId}':
     parameters:
       - schema:
           type: string
@@ -15,40 +15,88 @@ paths:
     get:
       summary: getTestExam
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  rank:
+                    type: string
+                  questions:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Bad Request
       operationId: get-test-exam-testExamId
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: testExamId
+      parameters: []
     post:
       summary: ''
       operationId: post-test-exam-testExamId
       responses:
         '200':
-          description: OK
+          description: '`Add test exam ${testExamId} successfully !!!`'
+        '400':
+          description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                type:
+                  type: string
+                rank:
+                  type: string
+                questions:
+                  type: array
+                  items:
+                    type: string
+        description: ''
     patch:
       summary: ''
       operationId: patch-test-exam-testExamId
       responses:
         '200':
-          description: OK
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: testExamId
+          description: '`Update test exam ${testExamId} successfully !!!`'
+        '400':
+          description: Bad Request
+      parameters: []
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                type:
+                  type: string
+                rank:
+                  type: string
+                questions:
+                  type: array
+                  items:
+                    type: string
     delete:
       summary: ''
       operationId: delete-test-exam-testExamId
       responses:
         '200':
-          description: OK
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: testExamId
+          description: '`Delete test exam ${testExamId} successfully !!!`'
+        '400':
+          description: Bad Request
+      parameters: []
+      description: ''
 components:
   schemas: {}
