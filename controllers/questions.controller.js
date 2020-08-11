@@ -2,11 +2,12 @@ const admin = require('firebase-admin');
 const firebaseHelper = require('firebase-functions-helper/dist');
 
 //Model
-const model = require('../models/question.model');
+const Question = require('../models/question.model').Question;
 
 const db = admin.firestore();
 const collectionName = 'questions';
 
+//Get 1 question
 module.exports.getQuestion = (req, res) => {
   const questionId = req.params.questionId;
   firebaseHelper
@@ -16,12 +17,14 @@ module.exports.getQuestion = (req, res) => {
   .catch(err => res.status(400).send(err));
 }
 
+//Get questions
 module.exports.getQuestions = (req, res) => {
   
 }
 
+//Post 1 question
 module.exports.addQuestion = (req, res) => {
-  let data = new model.Question(req.body);
+  let data = new Question(req.body);
   firebaseHelper
   .firestore
   .createNewDocument(db, collectionName, data)
