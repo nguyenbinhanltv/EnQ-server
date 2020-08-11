@@ -3,9 +3,9 @@ info:
   title: TestExamHistory
   version: '1.0'
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'http://localhost:3000/test-exam-history'
 paths:
-  '/test-exam-history/{testExamHistoryId}':
+  '/{testExamHistoryId}':
     parameters:
       - schema:
           type: string
@@ -15,28 +15,97 @@ paths:
     get:
       summary: getTestExamHistory
       tags: []
-      responses: {}
-      operationId: get-test-exam-history-testExamHistoryId
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: testExamHistoryId
-    post:
-      summary: addTestExamhistory
-      tags: []
-      responses: {}
-      operationId: post-test-exam-history-testExamHistoryId
-    delete:
-      summary: ''
-      operationId: delete-test-exam-history-testExamHistoryId
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  timeStart:
+                    type: string
+                  timeEnd:
+                    type: string
+                  testExamId:
+                    type: string
+                  answers:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Bad Request
+      operationId: get-test-exam-history-testExamHistoryId
+      parameters: []
+    post:
+      summary: createTestExamhistory
+      tags: []
+      responses:
+        '200':
+          description: '`Update test-exam-history ${testExamHistoryId} successfully !!!`'
+        '400':
+          description: Bad Request
+      operationId: post-test-exam-history-testExamHistoryId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                timeStart:
+                  type: string
+                timeEnd:
+                  type: string
+                testExamId:
+                  type: string
+                answers:
+                  type: array
+                  items:
+                    type: string
+    delete:
+      summary: deleteTestExamHistory
+      operationId: delete-test-exam-history-testExamHistoryId
+      responses:
+        '200':
+          description: '`Delete test-exam-history ${testExamHistoryId} successfully !!!`'
+        '400':
+          description: Bad Request
       parameters:
         - schema:
             type: string
           in: query
           name: testExamHistoryId
+      description: ''
+    patch:
+      summary: updateTestExamHistory
+      operationId: patch-testExamHistoryId
+      responses:
+        '200':
+          description: '`Update test-exam-history ${testExamHistoryId} successfully !!!`'
+        '400':
+          description: Bad Request
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                timeStart:
+                  type: string
+                timeEnd:
+                  type: string
+                testExamId:
+                  type: string
+                answers:
+                  type: array
+                  items:
+                    type: string
 components:
   schemas: {}

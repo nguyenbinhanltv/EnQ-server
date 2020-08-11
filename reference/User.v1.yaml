@@ -4,9 +4,9 @@ info:
   version: '1.0'
   description: ''
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'http://localhost:3000/users'
 paths:
-  '/users/{userId}':
+  '/{userId}':
     parameters:
       - schema:
           type: string
@@ -41,14 +41,9 @@ paths:
         '400':
           description: Bad Request
       operationId: get-users-userId
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: userId
-          required: true
+      parameters: []
     post:
-      summary: addUser
+      summary: createUser
       tags: []
       responses:
         '200':
@@ -84,12 +79,7 @@ paths:
           description: '`Update user data ${userId} sucessfully !!!`'
         '400':
           description: Bad Request
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: userId
-          required: true
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -118,12 +108,7 @@ paths:
           description: '`Delete user ${userId} sucessfully !!!`'
         '400':
           description: Bad Request
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: userId
-          required: true
+      parameters: []
       description: ''
 components:
   schemas: {}
