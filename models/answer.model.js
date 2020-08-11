@@ -1,4 +1,4 @@
-export class Answer {
+class Answer {
   constructor(options) {
     this.id = options.id; //string
     this.A = options.A; //string
@@ -8,3 +8,5 @@ export class Answer {
     this.correctAnswer = options.correctAnswer; //Enum<A, B, C, D>
   }
 }
+
+module.exports.Answer = Answer;

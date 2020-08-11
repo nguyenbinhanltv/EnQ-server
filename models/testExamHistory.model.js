@@ -1,4 +1,4 @@
-export class TestExamHistory {
+class TestExamHistory {
   constructor(options) {
     this.id = options.id; //string
     this.timeStart = options.timeStart; //string
@@ -7,3 +7,5 @@ export class TestExamHistory {
     this.answers = options.answers; //Array<Enum<A, B, C, D>>
   }
 }
+
+module.exports.TestExamHistory = TestExamHistory;

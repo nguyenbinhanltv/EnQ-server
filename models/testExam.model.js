@@ -1,4 +1,4 @@
-export class TestExam {
+class TestExam {
   constructor(options) {
     this.id = options.id; //string
     this.questions = options.questions; //Array<Question.id>
@@ -6,3 +6,5 @@ export class TestExam {
     this.rank = options.rank; //string
   }
 }
+
+module.exports.TestExam = TestExam;

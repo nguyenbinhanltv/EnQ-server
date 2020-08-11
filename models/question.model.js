@@ -1,4 +1,4 @@
-export class Question {
+class Question {
   constructor(options) {
     this.id = options.id; //string
     this.title = options.title; //string
@@ -7,3 +7,5 @@ export class Question {
     this.answer = options.answer; //Array<Answer.id>
   }
 }
+
+module.exports.Question = Question;
