@@ -6,8 +6,13 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /users:
-    parameters: []
+  '/users/{userId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
     get:
       summary: getUser
       tags: []
