@@ -44,7 +44,7 @@ module.exports.addUser = (req, res) => {
     firebaseHelper
     .firestore
     .updateDocument(db, collectionName, data.id, data)
-    .then(doc => res.status(200).send(`Create user ${data.id} successfully !!!`))
+    .then(doc => res.status(200).send(`Add user ${data.id} successfully !!!`))
     .catch(err => res.status(400).send(err));
   })
   .catch(err => res.status(400).send(err));
