@@ -49,3 +49,12 @@ module.exports.addUser = (req, res) => {
   })
   .catch(err => res.status(400).send(err));
 }
+
+module.exports.deleteUser = (req, res) => {
+  const userId = req.params.userId;
+  firebaseHelper
+  .firestore
+  .deleteDocument(db, collectionName, userId)
+  .then(doc => res.status(200).send(`Delete user ${userId} sucessfully !!!`))
+  .catch(err => res.status(400).send(err));
+}
