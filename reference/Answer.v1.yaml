@@ -79,11 +79,7 @@ paths:
           description: '`Update answer ${answerId} successfully !!!`'
         '400':
           description: Bad Request
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: answerId
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -110,10 +106,6 @@ paths:
           description: '`Delete answer ${answerId} successfully !!!`'
         '400':
           description: Bad Request
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: answerId
+      parameters: []
 components:
   schemas: {}
