@@ -40,7 +40,7 @@ paths:
       operationId: get-test-exam-history-testExamHistoryId
       parameters: []
     post:
-      summary: addTestExamhistory
+      summary: createTestExamhistory
       tags: []
       responses:
         '200':
@@ -67,7 +67,7 @@ paths:
                   items:
                     type: string
     delete:
-      summary: ''
+      summary: deleteTestExamHistory
       operationId: delete-test-exam-history-testExamHistoryId
       responses:
         '200':
@@ -81,7 +81,7 @@ paths:
           name: testExamHistoryId
       description: ''
     patch:
-      summary: ''
+      summary: updateTestExamHistory
       operationId: patch-testExamHistoryId
       responses:
         '200':

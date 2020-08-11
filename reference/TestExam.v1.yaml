@@ -38,7 +38,7 @@ paths:
       operationId: get-test-exam-testExamId
       parameters: []
     post:
-      summary: ''
+      summary: createTestExam
       operationId: post-test-exam-testExamId
       responses:
         '200':
@@ -63,7 +63,7 @@ paths:
                     type: string
         description: ''
     patch:
-      summary: ''
+      summary: updateTestExam
       operationId: patch-test-exam-testExamId
       responses:
         '200':
@@ -89,7 +89,7 @@ paths:
                   items:
                     type: string
     delete:
-      summary: ''
+      summary: deleteTestExam
       operationId: delete-test-exam-testExamId
       responses:
         '200':

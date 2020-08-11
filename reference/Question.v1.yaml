@@ -56,7 +56,7 @@ paths:
       operationId: get-questions-questionId
       parameters: []
     post:
-      summary: addQuestion
+      summary: createQuestion
       tags: []
       responses:
         '200':
@@ -85,7 +85,7 @@ paths:
                   items:
                     type: string
     patch:
-      summary: ''
+      summary: updateQuestion
       operationId: patch-questions-questionId
       responses:
         '200':
@@ -119,7 +119,7 @@ paths:
               required:
                 - id
     delete:
-      summary: ''
+      summary: deleteQuestion
       operationId: delete-questions-questionId
       responses:
         '200':

@@ -45,7 +45,7 @@ paths:
       description: ''
       parameters: []
     post:
-      summary: ''
+      summary: createAnswer
       operationId: post-answers-answerId
       responses:
         '201':
@@ -72,7 +72,7 @@ paths:
                 correctAnswer:
                   type: string
     patch:
-      summary: ''
+      summary: updateAnswer
       operationId: patch-answers-answerId
       responses:
         '201':
@@ -103,7 +103,7 @@ paths:
                 correctAnswer:
                   type: string
     delete:
-      summary: ''
+      summary: deleteAnswer
       operationId: delete-answers-answerId
       responses:
         '200':

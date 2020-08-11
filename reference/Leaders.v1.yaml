@@ -38,7 +38,7 @@ paths:
       operationId: get-leaders-leadersId
       parameters: []
     post:
-      summary: ''
+      summary: createLeaders
       operationId: post-leaders-leadersId
       responses:
         '200':
@@ -62,7 +62,7 @@ paths:
                 endAt:
                   type: string
     patch:
-      summary: ''
+      summary: updateLeaders
       operationId: patch-leaders-leadersId
       responses:
         '200':
@@ -87,7 +87,7 @@ paths:
                 endAt:
                   type: string
     delete:
-      summary: ''
+      summary: deleteLeaders
       operationId: delete-leaders-leadersId
       responses:
         '200':

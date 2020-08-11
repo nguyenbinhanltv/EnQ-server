@@ -43,7 +43,7 @@ paths:
       operationId: get-users-userId
       parameters: []
     post:
-      summary: addUser
+      summary: createUser
       tags: []
       responses:
         '200':
