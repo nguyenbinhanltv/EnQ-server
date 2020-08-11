@@ -6,34 +6,119 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  '/users/{userId}':
-    parameters:
-      - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
+  /users:
+    parameters: []
     get:
-      summary: getUserData
+      summary: getUser
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  userName:
+                    type: string
+                  photoURL:
+                    type: string
+                  rank:
+                    type: string
+                  point:
+                    type: string
+                  testHistory:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Bad Request
       operationId: get-users-userId
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: userId
+          required: true
     post:
-      summary: addUserData
+      summary: addUser
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: '`Create user ${userId} sucessfully !!!`'
+        '400':
+          description: Bad Request
       operationId: post-users-userId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                userName:
+                  type: string
+                photoURL:
+                  type: string
+                rank:
+                  type: string
+                point:
+                  type: string
+                testHistory:
+                  type: array
+                  items:
+                    type: string
     patch:
-      summary: ''
+      summary: updateUser
       operationId: patch-users-userId
       responses:
         '200':
-          description: OK
+          description: '`Update user data ${userId} sucessfully !!!`'
+        '400':
+          description: Bad Request
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: userId
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                userName:
+                  type: string
+                photoURL:
+                  type: string
+                rank:
+                  type: string
+                point:
+                  type: string
+                testHistory:
+                  type: array
+                  items:
+                    type: string
     delete:
-      summary: ''
+      summary: deleteUser
       operationId: delete-users-userId
       responses:
         '200':
-          description: OK
+          description: '`Delete user ${userId} sucessfully !!!`'
+        '400':
+          description: Bad Request
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: userId
+          required: true
+      description: ''
 components:
   schemas: {}

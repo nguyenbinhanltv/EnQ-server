@@ -5,34 +5,132 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  '/questions/{questionId}':
-    parameters:
-      - schema:
-          type: string
-        name: questionId
-        in: path
-        required: true
+  /questions:
+    parameters: []
     get:
       summary: getQuestion
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  rank:
+                    type: string
+                  type:
+                    type: string
+                  answers:
+                    type: array
+                    items:
+                      type: string
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  rank:
+                    type: string
+                  type:
+                    type: string
+                  answers:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Bad Request
       operationId: get-questions-questionId
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: questionId
+          required: true
     post:
       summary: addQuestion
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: '`Add Question ${questionId} Successfully !`'
+        '400':
+          description: Bad Request
       operationId: post-questions-questionId
+      parameters: []
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                title:
+                  type: string
+                rank:
+                  type: string
+                type:
+                  type: string
+                answers:
+                  type: array
+                  items:
+                    type: string
     patch:
       summary: ''
       operationId: patch-questions-questionId
       responses:
         '200':
-          description: OK
+          description: '`Update question ${questionId} sucessfully !!!`'
+        '400':
+          description: Bad Request
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: questionId
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                title:
+                  type: string
+                rank:
+                  type: string
+                type:
+                  type: string
+                answers:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - id
     delete:
       summary: ''
       operationId: delete-questions-questionId
       responses:
         '200':
-          description: OK
+          description: '`Delete question ${questionId} sucessfully !!!`'
+        '400':
+          description: Bad Request
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: questionId
+          required: true
 components:
   schemas: {}

@@ -17,6 +17,11 @@ paths:
       tags: []
       responses: {}
       operationId: get-test-exam-history-testExamHistoryId
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: testExamHistoryId
     post:
       summary: addTestExamhistory
       tags: []
@@ -28,5 +33,10 @@ paths:
       responses:
         '200':
           description: OK
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: testExamHistoryId
 components:
   schemas: {}

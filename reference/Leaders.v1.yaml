@@ -5,29 +5,105 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  '/leaders/{leadersId}':
-    parameters:
-      - schema:
-          type: string
-        name: leadersId
-        in: path
-        required: true
+  /leaders:
+    parameters: []
     get:
       summary: getLeaders
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  userId:
+                    type: array
+                    items:
+                      type: string
+                  startAt:
+                    type: string
+                  endAt:
+                    type: string
+        '400':
+          description: Bad Request
       operationId: get-leaders-leadersId
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: leadersId
     post:
       summary: ''
       operationId: post-leaders-leadersId
       responses:
         '200':
-          description: OK
+          description: '`Add Leaders board ${data.id} Successfully !`'
+        '400':
+          description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                userId:
+                  type: array
+                  items:
+                    type: string
+                startAt:
+                  type: string
+                endAt:
+                  type: string
     patch:
       summary: ''
       operationId: patch-leaders-leadersId
       responses:
         '200':
-          description: OK
+          description: '`Update leaders ${leadersId} successfully !!!`'
+        '400':
+          description: Bad Request
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: leadersId
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                userId:
+                  type: array
+                  items:
+                    type: string
+                startAt:
+                  type: string
+                endAt:
+                  type: string
+    delete:
+      summary: ''
+      operationId: delete-leaders-leadersId
+      responses:
+        '200':
+          description: '`Delete leaders ${leadersId} successfully !!!`'
+        '400':
+          description: Bad Request
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: leadersId
+          required: true
+      description: ''
 components:
   schemas: {}

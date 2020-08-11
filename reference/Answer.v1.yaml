@@ -61,11 +61,21 @@ paths:
       responses:
         '201':
           description: Created
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: answerId
     delete:
       summary: ''
       operationId: delete-answers-answerId
       responses:
         '200':
           description: OK
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: answerId
 components:
   schemas: {}

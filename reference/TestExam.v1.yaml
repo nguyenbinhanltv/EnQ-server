@@ -17,6 +17,11 @@ paths:
       tags: []
       responses: {}
       operationId: get-test-exam-testExamId
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: testExamId
     post:
       summary: ''
       operationId: post-test-exam-testExamId
@@ -29,11 +34,21 @@ paths:
       responses:
         '200':
           description: OK
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: testExamId
     delete:
       summary: ''
       operationId: delete-test-exam-testExamId
       responses:
         '200':
           description: OK
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: testExamId
 components:
   schemas: {}
