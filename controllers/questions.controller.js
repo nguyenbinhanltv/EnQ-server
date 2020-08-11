@@ -22,6 +22,17 @@ module.exports.getQuestions = (req, res) => {
   
 }
 
+//Update 1 question
+module.exports.updateQuestion = (req, res) => {
+  const questionId = req.params.questionId;
+  const data = new Question(req.body);
+  firebaseHelper
+  .firestore
+  .updateDocument(db, collectionName, questionId, data)
+  .then(doc => res.status(200).send(`Update question ${questionId} sucessfully !!!`))
+  .catch(err => res.status(400).send(err));
+}
+
 //Post 1 question
 module.exports.addQuestion = (req, res) => {
   let data = new Question(req.body);
@@ -39,11 +50,12 @@ module.exports.addQuestion = (req, res) => {
   .catch(err => res.status(400).send(err));
 }
 
+//Delete 1 question
 module.exports.deleteQuestion = (req, res) => {
   const questionId = req.params.questionId;
   firebaseHelper
   .firestore
   .deleteDocument(db, collectionName, questionId)
-  .then(doc => res.status(200).send(`Delete question ${questionId} sucessfully !!!`))
+  .then(doc => res.status(200).send(`Delete question ${questionId} successfully !!!`))
   .catch(err => res.status(400).send(err));
 }

@@ -29,7 +29,7 @@ module.exports.updateUser = (req, res) => {
   firebaseHelper
   .firestore
   .updateDocument(db, collectionName, userId, data)
-  .then(doc => res.status(200).send(`Update user data ${userId} sucessfully !!!`))
+  .then(doc => res.status(200).send(`Update user data ${userId} successfully !!!`))
   .catch(err => res.status(400).send(err));
 }
 
@@ -44,17 +44,18 @@ module.exports.addUser = (req, res) => {
     firebaseHelper
     .firestore
     .updateDocument(db, collectionName, data.id, data)
-    .then(doc => res.status(200).send(`Create user ${data.id} sucessfully !!!`))
+    .then(doc => res.status(200).send(`Create user ${data.id} successfully !!!`))
     .catch(err => res.status(400).send(err));
   })
   .catch(err => res.status(400).send(err));
 }
 
+//Delete 1 question
 module.exports.deleteUser = (req, res) => {
   const userId = req.params.userId;
   firebaseHelper
   .firestore
   .deleteDocument(db, collectionName, userId)
-  .then(doc => res.status(200).send(`Delete user ${userId} sucessfully !!!`))
+  .then(doc => res.status(200).send(`Delete user ${userId} successfully !!!`))
   .catch(err => res.status(400).send(err));
 }

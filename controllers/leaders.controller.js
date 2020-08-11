@@ -33,3 +33,24 @@ module.exports.addLeaders = (req, res) => {
   })
   .catch(err => res.status(400).send(err));
 }
+
+//Update 1 leaders
+module.exports.updateLeaders = (req, res) => {
+  const leadersId = req.params.leadersId;
+  const data = new Leaders(req.body);
+  firebaseHelper
+  .firestore
+  .updateDocument(db, collectionName, leadersId, data)
+  .then(doc => res.status(200).send(`Update leaders ${leadersId} successfully !!!`))
+  .catch(err => res.status(400).send(err));
+}
+
+//Delete 1 leaders
+module.exports.deleleLeaders = (req, res) => {
+  const leadersId = req.params.leadersId;
+  firebaseHelper
+  .firestore
+  .deleteDocument(db, collectionName, leadersId)
+  .then(doc => res.status(200).send(`Delete leaders ${leadersId} successfully !!!`))
+  .catch(err => res.status(400).send(err));
+}
