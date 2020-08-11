@@ -32,3 +32,20 @@ module.exports.updateUser = (req, res) => {
   .then(doc => res.status(200).send(`Update user data ${userId} sucessfully !!!`))
   .catch(err => res.status(400).send(err));
 }
+
+//Create 1 user
+module.exports.addUser = (req, res) => {
+  let data = new User(req.body);
+  firebaseHelper
+  .firestore
+  .createNewDocument(db, collectionName, data)
+  .then(doc => {
+    data.id = doc.id;
+    firebaseHelper
+    .firestore
+    .updateDocument(db, collectionName, data.id, data)
+    .then(doc => res.status(200).send(`Create user ${data.id} sucessfully !!!`))
+    .catch(err => res.status(400).send(err));
+  })
+  .catch(err => res.status(400).send(err));
+}
