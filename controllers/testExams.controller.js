@@ -2,11 +2,12 @@ const admin = require('firebase-admin');
 const firebaseHelper = require('firebase-functions-helper/dist');
 
 //Model
-const model = require('../models/testExam.model');
+const TestExam = require('../models/testExam.model').TestExam;
 
 const db = admin.firestore();
 const collectionName = 'test-exam';
 
+//Get 1 test-exam
 module.exports.getTestExam = (req, res) => {
   const testExamId = req.params.testExamId;
   firebaseHelper

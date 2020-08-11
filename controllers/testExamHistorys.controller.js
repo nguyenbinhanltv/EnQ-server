@@ -2,11 +2,12 @@ const admin = require('firebase-admin');
 const firebaseHelper = require('firebase-functions-helper/dist');
 
 //Model
-const model = require('../models/testExamHistory.model');
+const TestExamHistory = require('../models/testExamHistory.model').TestExamHistory;
 
 const db = admin.firestore();
 const collectionName = 'test-exam-history';
 
+//Get 1 test-exam history
 module.exports.getTestExamHistory = (req, res) => {
     const testExamHistoryId = req.params.testExamHistoryId;
     console.log(testExamHistoryId);
@@ -17,12 +18,14 @@ module.exports.getTestExamHistory = (req, res) => {
     .catch(err => res.status(400).send(err));
 }
 
+//Get test-exams history
 module.exports.getTestExamHistorys = (req, res) => {
   
 }
 
+//Post 1 test-exam history
 module.exports.addTestExamHistory = (req, res) => {
-    let data = new model.TestExamHistory(req.body);
+    let data = new TestExamHistory(req.body);
     firebaseHelper
     .firestore
     .createNewDocument(db, collectionName, data)

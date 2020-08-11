@@ -2,11 +2,12 @@ const admin = require('firebase-admin');
 const firebaseHelper = require('firebase-functions-helper/dist');
 
 //Model
-const model = require('../models/question.model');
+const Question = require('../models/question.model').Question;
 
 const db = admin.firestore();
 const collectionName = 'questions';
 
+//Get 1 question
 module.exports.getQuestion = (req, res) => {
   const questionId = req.params.questionId;
   firebaseHelper
@@ -16,12 +17,25 @@ module.exports.getQuestion = (req, res) => {
   .catch(err => res.status(400).send(err));
 }
 
+//Get questions
 module.exports.getQuestions = (req, res) => {
   
 }
 
+//Update 1 question
+module.exports.updateQuestion = (req, res) => {
+  const questionId = req.params.questionId;
+  const data = new Question(req.body);
+  firebaseHelper
+  .firestore
+  .updateDocument(db, collectionName, questionId, data)
+  .then(doc => res.status(200).send(`Update question ${questionId} sucessfully !!!`))
+  .catch(err => res.status(400).send(err));
+}
+
+//Post 1 question
 module.exports.addQuestion = (req, res) => {
-  let data = new model.Question(req.body);
+  let data = new Question(req.body);
   firebaseHelper
   .firestore
   .createNewDocument(db, collectionName, data)
@@ -33,5 +47,15 @@ module.exports.addQuestion = (req, res) => {
     .then(doc => res.status(200).send(`Add Question ${data.id} Successfully !`))
     .catch(err => res.status(400).send(err));
   })
+  .catch(err => res.status(400).send(err));
+}
+
+//Delete 1 question
+module.exports.deleteQuestion = (req, res) => {
+  const questionId = req.params.questionId;
+  firebaseHelper
+  .firestore
+  .deleteDocument(db, collectionName, questionId)
+  .then(doc => res.status(200).send(`Delete question ${questionId} successfully !!!`))
   .catch(err => res.status(400).send(err));
 }
