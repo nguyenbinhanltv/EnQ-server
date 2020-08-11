@@ -38,3 +38,12 @@ module.exports.addQuestion = (req, res) => {
   })
   .catch(err => res.status(400).send(err));
 }
+
+module.exports.deleteQuestion = (req, res) => {
+  const questionId = req.params.questionId;
+  firebaseHelper
+  .firestore
+  .deleteDocument(db, collectionName, questionId)
+  .then(doc => res.status(200).send(`Delete question ${questionId} sucessfully !!!`))
+  .catch(err => res.status(400).send(err));
+}
