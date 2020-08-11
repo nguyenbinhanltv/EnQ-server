@@ -2,7 +2,7 @@ const admin = require('firebase-admin');
 const firebaseHelper = require('firebase-functions-helper/dist');
 
 //Model
-const model = require('../models/answer.model');
+const Answer = require('../models/answer.model').Answer;
 
 const db = admin.firestore();
 const collectionName = 'answers';
