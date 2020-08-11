@@ -25,9 +25,10 @@ module.exports.getUsers = (req, res) => {
 //Post 1 user
 module.exports.updateUser = (req, res) => {
   const data = new User(req.body);
+  const userId = req.params.userId;
   firebaseHelper
   .firestore
-  .updateDocument(db, collectionName, data.id, data)
-  .then(doc => res.status(200).send(`Update user data ${data.id} sucessfully !!!`))
+  .updateDocument(db, collectionName, userId, data)
+  .then(doc => res.status(200).send(`Update user data ${userId} sucessfully !!!`))
   .catch(err => res.status(400).send(err));
 }
