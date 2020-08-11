@@ -1,0 +1,42 @@
+{
+  "title": "User",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "userName": {
+      "type": "string"
+    },
+    "photoURL": {
+      "type": "string"
+    },
+    "rank": {
+      "type": "string"
+    },
+    "point": {
+      "type": "string"
+    },
+    "testHistory": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "id"
+  ],
+  "x-examples": {
+    "example": {
+      "id": "string",
+      "userName": "string",
+      "photoURL": "string",
+      "rank": "string",
+      "point": "string",
+      "testHistory": [
+        "string"
+      ]
+    }
+  }
+}

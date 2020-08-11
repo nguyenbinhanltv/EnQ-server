@@ -1,0 +1,32 @@
+openapi: 3.0.0
+info:
+  title: TestExamHistory
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/test-exam-history/{testExamHistoryId}':
+    parameters:
+      - schema:
+          type: string
+        name: testExamHistoryId
+        in: path
+        required: true
+    get:
+      summary: getTestExamHistory
+      tags: []
+      responses: {}
+      operationId: get-test-exam-history-testExamHistoryId
+    post:
+      summary: addTestExamhistory
+      tags: []
+      responses: {}
+      operationId: post-test-exam-history-testExamHistoryId
+    delete:
+      summary: ''
+      operationId: delete-test-exam-history-testExamHistoryId
+      responses:
+        '200':
+          description: OK
+components:
+  schemas: {}

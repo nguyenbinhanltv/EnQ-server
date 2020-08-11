@@ -1,0 +1,34 @@
+{
+  "title": "Leaders",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "startAt": {
+      "type": "string"
+    },
+    "endAt": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "id"
+  ],
+  "x-examples": {
+    "example": {
+      "id": "string",
+      "startAt": "string",
+      "endAt": "string",
+      "userId": [
+        "string"
+      ]
+    }
+  }
+}

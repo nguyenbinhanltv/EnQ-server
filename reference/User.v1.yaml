@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  title: User
+  version: '1.0'
+  description: ''
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/users/{userId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: getUserData
+      tags: []
+      responses: {}
+      operationId: get-users-userId
+    post:
+      summary: addUserData
+      tags: []
+      responses: {}
+      operationId: post-users-userId
+    patch:
+      summary: ''
+      operationId: patch-users-userId
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: ''
+      operationId: delete-users-userId
+      responses:
+        '200':
+          description: OK
+components:
+  schemas: {}

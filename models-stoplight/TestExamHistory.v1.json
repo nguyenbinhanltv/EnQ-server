@@ -1,0 +1,25 @@
+{
+  "title": "TestExamHistory",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "timeStart": {
+      "type": "string"
+    },
+    "timeEnd": {
+      "type": "string"
+    },
+    "testExamId": {
+      "type": "string"
+    },
+    "answers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "description": ""
+}

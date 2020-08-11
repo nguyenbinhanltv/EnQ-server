@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  title: Answer
+  version: '1.0'
+  description: ''
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/answers/{answerId}':
+    parameters:
+      - schema:
+          type: string
+        name: answerId
+        in: path
+        required: true
+    get:
+      summary: getAnswer
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  A:
+                    type: string
+                  B:
+                    type: string
+                  C:
+                    type: string
+                  D:
+                    type: string
+                  correctAnswer:
+                    type: string
+              examples: {}
+        '400':
+          description: Bad Request
+      operationId: get-answers-answerId
+      description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: answerId
+          required: true
+    post:
+      summary: ''
+      operationId: post-answers-answerId
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+    patch:
+      summary: ''
+      operationId: patch-answers-answerId
+      responses:
+        '201':
+          description: Created
+    delete:
+      summary: ''
+      operationId: delete-answers-answerId
+      responses:
+        '200':
+          description: OK
+components:
+  schemas: {}

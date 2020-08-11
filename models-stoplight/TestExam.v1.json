@@ -1,0 +1,34 @@
+{
+  "title": "TestExam",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "rank": {
+      "type": "string"
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "id"
+  ],
+  "x-examples": {
+    "example": {
+      "id": "string",
+      "type": "string",
+      "rank": "string",
+      "questions": [
+        "string"
+      ]
+    }
+  }
+}

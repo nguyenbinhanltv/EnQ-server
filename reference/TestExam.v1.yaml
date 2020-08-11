@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  title: TestExam
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/test-exam/{testExamId}':
+    parameters:
+      - schema:
+          type: string
+        name: testExamId
+        in: path
+        required: true
+    get:
+      summary: getTestExam
+      tags: []
+      responses: {}
+      operationId: get-test-exam-testExamId
+    post:
+      summary: ''
+      operationId: post-test-exam-testExamId
+      responses:
+        '200':
+          description: OK
+    patch:
+      summary: ''
+      operationId: patch-test-exam-testExamId
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: ''
+      operationId: delete-test-exam-testExamId
+      responses:
+        '200':
+          description: OK
+components:
+  schemas: {}

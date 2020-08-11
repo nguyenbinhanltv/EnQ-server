@@ -1,0 +1,39 @@
+{
+  "title": "question",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "rank": {
+      "type": "string"
+    },
+    "answer": {
+      "type": [
+        "string",
+        "array"
+      ],
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "id"
+  ],
+  "x-examples": {
+    "example": {
+      "id": "string",
+      "title": "string",
+      "type": "string",
+      "rank": "string",
+      "answer": null
+    }
+  }
+}
