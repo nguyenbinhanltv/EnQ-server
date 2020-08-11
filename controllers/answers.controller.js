@@ -49,3 +49,13 @@ module.exports.addAnswer = (req, res) => {
   })
   .catch(err => res.status(400).send(err));
 }
+
+//Delete 1 answer
+module.exports.deleteAnswer = (req, res) => {
+  const answerId = req.params.answerId;
+  firebaseHelper
+  .firestore
+  .deleteDocument(db, collectionName, answerId)
+  .then(doc => res.status(200).send(`Delete answer ${answerId} successfully !!!`))
+  .catch(err => res.status(400).send(err));
+}
