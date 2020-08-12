@@ -3,7 +3,7 @@ info:
   title: Leaders
   version: '1.0'
 servers:
-  - url: 'https://enq-server.herokuapp.com//leaders'
+  - url: 'https://enq-server.herokuapp.com/leaders'
 paths:
   '/{leadersId}':
     parameters:

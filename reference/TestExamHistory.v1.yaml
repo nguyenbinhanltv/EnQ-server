@@ -3,7 +3,7 @@ info:
   title: TestExamHistory
   version: '1.0'
 servers:
-  - url: 'https://enq-server.herokuapp.com//test-exam-history'
+  - url: 'https://enq-server.herokuapp.com/test-exam-history'
 paths:
   '/{testExamHistoryId}':
     parameters:
