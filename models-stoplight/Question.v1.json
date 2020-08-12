@@ -1,6 +1,15 @@
 {
   "title": "question",
   "type": "object",
+  "x-examples": {
+    "example": {
+      "id": "string",
+      "title": "string",
+      "type": "string",
+      "rank": "string",
+      "answer": null
+    }
+  },
   "properties": {
     "id": {
       "type": "string"
@@ -14,11 +23,8 @@
     "rank": {
       "type": "string"
     },
-    "answer": {
-      "type": [
-        "string",
-        "array"
-      ],
+    "answers": {
+      "type": "array",
       "items": {
         "type": "string"
       }
@@ -26,14 +32,5 @@
   },
   "required": [
     "id"
-  ],
-  "x-examples": {
-    "example": {
-      "id": "string",
-      "title": "string",
-      "type": "string",
-      "rank": "string",
-      "answer": null
-    }
-  }
+  ]
 }
