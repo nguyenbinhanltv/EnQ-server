@@ -5,9 +5,9 @@
 
 ## Tech stack
 
-- [Nodejs][nodejs]
-- [Expressjs][expressjs]
-- [Stoplightio][stoplight]
+- [Node][nodejs]
+- [Express][expressjs]
+- [Stoplight][stoplight]
 - [Heroku][heroku]
 - [Firebase][firebase]
 
@@ -22,11 +22,11 @@
 ![](https://github.com/nguyenbinhanltv/EnQ-server/blob/master/Prototype/Untitled%20Diagram.png)
 
 # Members
-### [1.Nguyen Binh An]!(https://github.com/nguyenbinhanltv)
+### 1.[Nguyen Binh An](https://github.com/nguyenbinhanltv)
 
-### [2.Nguyen Hoai Gia Linh]!(https://github.com/linhsol26)
+### 2.[Nguyen Hoai Gia Linh](https://github.com/linhsol26)
 
-### [1.Ho Huynh Duc]!(https://github.com/duca7)
+### 3.[Ho Huynh Duc](https://github.com/duca7)
 
 # Setting up development environment in this project 🛠
 
