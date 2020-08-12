@@ -3,7 +3,7 @@ info:
   title: Question
   version: '1.0'
 servers:
-  - url: 'http://localhost:3000/questions'
+  - url: 'https://enq-server.herokuapp.com/questions'
 paths:
   '/{questionId}':
     parameters:

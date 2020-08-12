@@ -4,7 +4,7 @@ info:
   version: '1.0'
   description: ''
 servers:
-  - url: 'http://localhost:3000/answers'
+  - url: 'https://enq-server.herokuapp.com/answers'
 paths:
   '/{answerId}':
     parameters:

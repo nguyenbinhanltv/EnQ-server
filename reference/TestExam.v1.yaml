@@ -3,7 +3,7 @@ info:
   title: TestExam
   version: '1.0'
 servers:
-  - url: 'http://localhost:3000/test-exam'
+  - url: 'https://enq-server.herokuapp.com/test-exam'
 paths:
   '/{testExamId}':
     parameters:
