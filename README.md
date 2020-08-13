@@ -30,8 +30,8 @@
 
 # Setting up development environment in this project 🛠
 
-- create firebase project with your account
-- download serviceAccounts in firebase to this project
+- Create firebase project with your account
+- Download serviceAccounts in firebase to this project
 - `git clone https://github.com/nguyenbinhanltv/EnQ-server.git`
 - `cd EnQ-server`
 - `npm i` for install the dependency
