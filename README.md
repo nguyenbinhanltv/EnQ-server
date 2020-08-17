@@ -28,6 +28,10 @@
 
 ### 3.[Ho Huynh Duc](https://github.com/duca7)
 
+### 4.[Luu Nguyen Quoc Thang](https://github.com/thangluu93)
+
+### 5.[Nguyen Van Minh Tuan](https://github.com/tuannvmk18)
+
 # Setting up development environment in this project 🛠
 
 - Create firebase project with your account
