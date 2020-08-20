@@ -7,6 +7,18 @@ const Leaders = require('../models/leaders.model').Leaders;
 const db = admin.firestore();
 const collectionName = 'leaders';
 
+//Get all leaders board
+module.exports.getAllLeaders = async (req, res) => {
+  let data = [];
+  const leadersRef = db.collection('leaders');
+  await leadersRef.get()
+  .then(snapshot => snapshot.forEach(doc => {
+    data.push(doc.data());
+  }))
+  .then(doc => res.status(200).send(data))
+  .catch(err => res.status(400).send(err));
+}
+
 //Get leaders board
 module.exports.getLeaders = (req, res) => {
   const leadersId = req.params.leadersId;

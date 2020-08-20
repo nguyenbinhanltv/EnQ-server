@@ -5,6 +5,8 @@ const router = express.Router();
 
 router.get('/:testExamHistoryId', controller.getTestExamHistory);
 router.post('/', controller.addTestExamHistory);
+router.delete('/:testExamHistoryId', controller.deleteTestExamHistory);
+router.patch('/:testExamHistoryId', controller.updateTestExamHistory);
 
 
 module.exports = router;
