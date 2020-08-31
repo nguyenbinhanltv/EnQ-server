@@ -18,7 +18,7 @@ module.exports.getAnswer = (req, res) => {
 }
 
 //Get answers
-module.exports.getAnswers = (req, res) => {
+module.exports.getAnswers = async (req, res) => {
   let data = [];
   const answersRef = db.collection('answers');
   await answersRef.get()
