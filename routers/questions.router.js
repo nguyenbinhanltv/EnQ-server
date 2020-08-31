@@ -4,6 +4,7 @@ const controller = require('../controllers/questions.controller');
 const router = express.Router();
 
 router.get('/:questionId', controller.getQuestion);
+router.get('/', controller.getQuestions);
 router.patch('/:questionId', controller.updateQuestion);
 router.post('/', controller.addQuestion);
 router.delete('/questionId', controller.deleteQuestion);
