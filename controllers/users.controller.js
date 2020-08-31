@@ -18,8 +18,15 @@ module.exports.getUser = (req, res) => {
 }
 
 //Get users
-module.exports.getUsers = (req, res) => {
-  
+module.exports.getUsers = async (req, res) => {
+  let data = [];
+  const usersRef = db.collection('users');
+  await usersRef.get()
+  .then(snapshot => snapshot.forEach(doc => {
+    data.push(doc.data());
+  }))
+  .then(doc => res.status(200).send(data))
+  .catch(err => res.status(400).send(err));
 }
 
 //Post 1 user
