@@ -19,13 +19,20 @@ module.exports.getTestExamHistory = (req, res) => {
 }
 
 //Get test-exams history
-module.exports.getTestExamHistorys = (req, res) => {
-  
+module.exports.getTestExamHistorys = async (req, res) => {
+    let data = [];
+    const testExamHistorysRef = db.collection('test-exam-history');
+    await testExamHistorysRef.get()
+    .then(snapshot => snapshot.forEach(doc => {
+      data.push(doc.data());
+    }))
+    .then(doc => res.status(200).send(data))
+    .catch(err => res.status(400).send(err));
 }
 
 //Post 1 test-exam history
 module.exports.addTestExamHistory = (req, res) => {
-    let data = new TestExamHistory(req.body);
+    let data = {...new TestExamHistory(req.body)};
     firebaseHelper
     .firestore
     .createNewDocument(db, collectionName, data)
@@ -43,7 +50,7 @@ module.exports.addTestExamHistory = (req, res) => {
 //Update 1 test-exam history
 module.exports.updateTestExamHistory = (req, res) => {
     const testExamHistoryId = req.params.testExamHistoryId;
-    const data = new TestExamHistory(req.body);
+    const data = {...new TestExamHistory(req.body)};
     firebaseHelper
     .firestore
     .updateDocument(db, collectionName, testExamHistoryId, data)

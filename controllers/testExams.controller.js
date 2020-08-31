@@ -19,7 +19,7 @@ module.exports.getTestExam = (req, res) => {
 
 //Add 1 TestExam
 module.exports.addTestExam = (req, res) => {
-  let data = new TestExam(req.body);
+  let data = {...new TestExam(req.body)};
   firebaseHelper
   .firestore
   .createNewDocument(db, collectionName, data)
@@ -37,7 +37,7 @@ module.exports.addTestExam = (req, res) => {
 //Update 1 TestExam
 module.exports.updateTestExam = (req, res) => {
   const testExamId = req.params.testExamId;
-  const data = new TestExam(req.body);
+  const data = {...new TestExam(req.body)};
   firebaseHelper
   .firestore
   .updateDocument(db, collectionName, testExamId, data)

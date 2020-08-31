@@ -31,7 +31,7 @@ module.exports.getLeaders = (req, res) => {
 
 //Post leaders board
 module.exports.addLeaders = (req, res) => {
-  let data = new Leaders(req.body);
+  let data = {...new Leaders(req.body)};
   firebaseHelper
   .firestore
   .createNewDocument(db, collectionName, data)
@@ -49,7 +49,7 @@ module.exports.addLeaders = (req, res) => {
 //Update 1 leaders
 module.exports.updateLeaders = (req, res) => {
   const leadersId = req.params.leadersId;
-  const data = new Leaders(req.body);
+  const data = {...new Leaders(req.body)};
   firebaseHelper
   .firestore
   .updateDocument(db, collectionName, leadersId, data)

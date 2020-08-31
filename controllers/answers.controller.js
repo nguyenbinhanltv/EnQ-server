@@ -19,13 +19,20 @@ module.exports.getAnswer = (req, res) => {
 
 //Get answers
 module.exports.getAnswers = (req, res) => {
-  
+  let data = [];
+  const answersRef = db.collection('answers');
+  await answersRef.get()
+  .then(snapshot => snapshot.forEach(doc => {
+    data.push(doc.data());
+  }))
+  .then(doc => res.status(200).send(data))
+  .catch(err => res.status(400).send(err));
 }
 
 //Update 1 answer
 module.exports.updateAnswer = (req, res) => {
   const answerId = req.params.answerId;
-  const data = new Answer(req.body);
+  const data = {...new Answer(req.body)};
   firebaseHelper
   .firestore
   .updateDocument(db, collectionName, answerId, data)
@@ -35,7 +42,7 @@ module.exports.updateAnswer = (req, res) => {
 
 //Post 1 answer
 module.exports.addAnswer = (req, res) => {
-  let data = new Answer(req.body);
+  let data = {...new Answer(req.body)};
   firebaseHelper
   .firestore
   .createNewDocument(db, collectionName, data)

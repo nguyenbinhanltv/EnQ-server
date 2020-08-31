@@ -31,7 +31,7 @@ module.exports.getUsers = async (req, res) => {
 
 //Post 1 user
 module.exports.updateUser = (req, res) => {
-  const data = new User(req.body);
+  const data = {...new User(req.body)};
   const userId = req.params.userId;
   firebaseHelper
   .firestore
@@ -42,7 +42,7 @@ module.exports.updateUser = (req, res) => {
 
 //Create 1 user
 module.exports.addUser = (req, res) => {
-  let data = new User(req.body);
+  let data = {...new User(req.body)};
   firebaseHelper
   .firestore
   .createNewDocument(db, collectionName, data)
