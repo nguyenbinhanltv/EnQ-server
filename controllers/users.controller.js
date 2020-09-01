@@ -43,6 +43,7 @@ module.exports.updateUser = (req, res) => {
 //Create 1 user
 module.exports.addUser = (req, res) => {
   let data = {...new User(req.body)};
+  
   firebaseHelper
   .firestore
   .createNewDocument(db, collectionName, data)
