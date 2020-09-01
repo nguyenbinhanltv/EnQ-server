@@ -1,6 +1,7 @@
 class User {
   constructor(options) {
-    this.userName = options.userName; //string
+    this.displayName = options.displayName; //string
+    this.email = options.email; //string
     this.id = options.id; //string
     this.photoURL = options.photoURL; //string
     this.rank = options.rank; //string
