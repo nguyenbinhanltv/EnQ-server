@@ -64,14 +64,20 @@ module.exports.updateUser = (req, res) => {
 }
 
 //Create 1 user
-module.exports.addUser = (req, res) => {
+module.exports.addUser = async (req, res) => {
   let data = {
     ...new User(req.body)
   };
 
-  if (logicHandlers.CheckAlreadyExist(data.email)) {
-    res.status(202).send(`User ${data.id} already exist !!!`);
-  } else {
+  //Cờ kiểm tra user có email tồn tại chưa
+  let emailFlag;
+  await logicHandlers.CheckAlreadyExist(data.email).then(doc => emailFlag = doc);
+
+  if (emailFlag) {
+    res.status(202).send(`User ${data.email} already exist !!!`);
+  }
+  
+  if (!emailFlag) {
     if (data) {
       firebaseHelper
         .firestore

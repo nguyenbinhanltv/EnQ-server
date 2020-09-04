@@ -5,18 +5,11 @@ const db = admin.firestore();
 const collectionName = 'users';
 
 module.exports.CheckAlreadyExist = async (email) => {
-  let user = null;
+  const userRef = db.collection(collectionName);
+  const snapshot = await userRef.where('email', '==', email).get();
+  if(snapshot.empty) {
+    return false;
+  }
 
-  const queryArray = [
-    ['email', '==', email],
-  ];
-  const orderBy = ['email'];
-
-  await firebaseHelper
-  .firestore
-  .queryData(db, collectionName, queryArray, orderBy)
-  .then(doc => user = doc)
-  .catch(err => err);
-
-  return user;
+  return true;
 }
