@@ -1,11 +1,23 @@
 {
   "title": "User",
   "type": "object",
+  "x-examples": {
+    "example": {
+      "id": "string",
+      "userName": "string",
+      "photoURL": "string",
+      "rank": "string",
+      "point": "string",
+      "testHistory": [
+        "string"
+      ]
+    }
+  },
   "properties": {
     "id": {
       "type": "string"
     },
-    "userName": {
+    "displayName": {
       "type": "string"
     },
     "photoURL": {
@@ -22,21 +34,12 @@
       "items": {
         "type": "string"
       }
+    },
+    "email": {
+      "type": "string"
     }
   },
   "required": [
     "id"
-  ],
-  "x-examples": {
-    "example": {
-      "id": "string",
-      "userName": "string",
-      "photoURL": "string",
-      "rank": "string",
-      "point": "string",
-      "testHistory": [
-        "string"
-      ]
-    }
-  }
+  ]
 }
