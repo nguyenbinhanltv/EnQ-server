@@ -1,10 +1,4 @@
-const admin = require('firebase-admin');
-const firebaseHelper = require('firebase-functions-helper/dist');
-
-const db = admin.firestore();
-const collectionName = 'users';
-
-module.exports.CheckAlreadyExist = async (email) => {
+module.exports.CheckEmailAlreadyExists = async (db, collectionName, email) => {
   const userRef = db.collection(collectionName);
   const snapshot = await userRef.where('email', '==', email).get();
   if(snapshot.empty) {
@@ -12,4 +6,14 @@ module.exports.CheckAlreadyExist = async (email) => {
   }
 
   return true;
+}
+
+module.exports.CheckUserAlreadyExists = async (db, collectionName, docId) => {
+  const userRef = db.collection(collectionName);
+  const snapshot = await userRef.doc(docId).get();
+  if(snapshot.exists) {
+    return true;
+  }
+
+  return false;
 }

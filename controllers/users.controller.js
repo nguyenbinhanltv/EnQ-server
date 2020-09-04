@@ -43,10 +43,11 @@ module.exports.getUsers = async (req, res) => {
 
 //Post 1 user
 module.exports.updateUser = (req, res) => {
+  const userId = req.params.userId;
   const data = {
     ...new User(req.body)
   };
-  const userId = req.params.userId;
+  data.id = userId;
 
   firebaseHelper
     .firestore
@@ -71,12 +72,12 @@ module.exports.addUser = async (req, res) => {
 
   //Cờ kiểm tra user có email tồn tại chưa
   let emailFlag;
-  await logicHandlers.CheckAlreadyExist(data.email).then(doc => emailFlag = doc);
+  await logicHandlers.CheckEmailAlreadyExists(db, collectionName, data.email).then(doc => emailFlag = doc);
 
   if (emailFlag) {
     res.status(202).send(`User ${data.email} already exist !!!`);
   }
-  
+
   if (!emailFlag) {
     if (data) {
       firebaseHelper
@@ -98,9 +99,18 @@ module.exports.addUser = async (req, res) => {
 //Delete 1 question
 module.exports.deleteUser = (req, res) => {
   const userId = req.params.userId;
+
   firebaseHelper
     .firestore
-    .deleteDocument(db, collectionName, userId)
-    .then(doc => res.status(200).send(`Delete user ${userId} successfully !!!`))
-    .catch(err => res.status(400).send(err));
+    .checkDocumentExists(db, collectionName, userId)
+    .then(result => {
+      if (result.exists) {
+        firebaseHelper
+          .firestore
+          .deleteDocument(db, collectionName, userId)
+          .then(doc => res.status(200).send(`Delete user ${userId} successfully !!!`))
+          .catch(err => res.status(400).send(err));
+      }
+    })
+    .catch(err => res.status(400).send(`Do not have user ${userId}`));
 }
