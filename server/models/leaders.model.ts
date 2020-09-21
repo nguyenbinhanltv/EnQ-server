@@ -4,8 +4,8 @@ import { LeadersType } from "../utils/enum";
 export interface Leaders {
   _id: string; //string
   users: Array<User>; //Array<User>
-  startAt: string; //string
-  endAt: string; //string
+  startAt: number; //Date seconds
+  endAt: number; //Date seconds
   type: LeadersType; //day or week
 }
 
@@ -16,8 +16,8 @@ export interface Leaders {
 // Leaders type DAY
 const leadersDay: Leaders = {
   _id: "9t3IrigkUum5c5u1WysQ",
-  startAt: Date.now().toString(),
-  endAt: Date.now().toString() + 86400,
+  startAt: Date.now(),
+  endAt: Date.now() + 86400,
   type: 0,
   users: [
     {
@@ -36,8 +36,8 @@ const leadersDay: Leaders = {
 // Leaders type WEEK
 const leadersWeek: Leaders = {
   _id: "9t3IrigkUum5c5u1WysQ",
-  startAt: Date.now().toString(),
-  endAt: Date.now().toString() + 604800,
+  startAt: Date.now(),
+  endAt: Date.now() + 604800,
   type: 1,
   users: [
     {
