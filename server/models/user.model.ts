@@ -7,7 +7,7 @@ export interface User {
   photoURL: string; //string
   rank: number; //number
   point: number; //number
-  testExamHistory?: TestExamHistory;
+  testExamHistory?: Array<TestExamHistory>;
 }
 
 /**
@@ -21,4 +21,48 @@ const user: User = {
     "https://lh3.googleusercontent.com/a-/AOh14GhLWdM4dY2PkM6RHZAZQF5BZmEnKkpegZGH99ub=s96-c",
   rank: 0,
   point: 0,
+  testExamHistory: [
+    {
+      _id: "3ZfWPlCHVm4Alvzvfdly",
+      timeStart: Date.now(),
+      timeEnd: Date.now(),
+      testExam: {
+        _id: "7OlbrONIxp0CjeGWtkIw",
+        questions: [
+          {
+            _id: "EMfVyJXLS4BZMiyZredm",
+            title:
+              "Are there any flowers to the left of your house? _____________.",
+            type: 0,
+            rank: 0,
+            answer: {
+              A: "Yes, there are",
+              B: " Yes, there is",
+              C: "No, there isn’t",
+              D: "",
+              correctAnswer: 0,
+            },
+          },
+          {
+            _id: "EMfVyJXLS4BZMiyZredm",
+            title:
+              "Are there any flowers to the left of your house? _____________.",
+            type: 0,
+            rank: 0,
+            answer: {
+              A: "Yes, there are",
+              B: " Yes, there is",
+              C: "No, there isn’t",
+              D: "",
+              correctAnswer: 0,
+            },
+          },
+          // ...
+        ],
+        type: 0,
+        rank: 0,
+      },
+      answers: [0, 1],
+    },
+  ],
 };

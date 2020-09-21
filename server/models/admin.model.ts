@@ -1,3 +1,9 @@
+/**
+ * @description
+ * Access token available 1h
+ * Refresh token available 24h
+ */
+
 export interface AdminUser {
   _id: string; // Type string
   displayName: string; // Type string name
