@@ -1,3 +1,5 @@
+import { TestExamHistory } from "./test-exam-history.model";
+
 export interface User {
   displayName: string; //string name
   email: string; //string gmail
@@ -5,6 +7,7 @@ export interface User {
   photoURL: string; //string
   rank: number; //number
   point: number; //number
+  testExamHistory?: TestExamHistory;
 }
 
 /**
