@@ -4,3 +4,8 @@ export enum AnswerType {
   C,
   D
 }
+
+export enum LeadersType {
+  DAY,
+  WEEK
+}
