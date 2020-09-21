@@ -68,14 +68,23 @@ export const signUp = async (req, res) => {
     const result: AdminUser = clone(body);
 
     return await firebaseHelper.firestore
-      .createDocumentWithID(db, collectionName, result._id, result)
-      .then((doc) =>
-        res.status(200).send({
-          message: "Register successfully",
-        })
-      );
+      .createNewDocument(db, collectionName, result)
+      .then((doc) => {
+        result._id = doc.id;
+        firebaseHelper.firestore
+          .updateDocument(db, collectionName, result._id, result)
+          .then((doc) =>
+            res.status(200).send({
+              message: "Register successfully",
+            })
+          )
+          .catch((err) =>
+            res.status(400).send({
+              error: "Invalid _id",
+            })
+          );
+      });
   } catch (error) {
-    console.log(error);
     res.status(400).send({
       error: error,
     });

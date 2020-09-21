@@ -5,7 +5,7 @@
  */
 
 export interface AdminUser {
-  _id: string; // Type string
+  _id?: string; // Type string
   displayName: string; // Type string name
   userName: string; // Type string, max 15
   email: string; // Type gmail

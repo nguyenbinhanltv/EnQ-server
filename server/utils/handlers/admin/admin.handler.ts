@@ -16,7 +16,7 @@ export const comparePassword = (password, hashedPassword) => {
 // Validate when sign up
 export const validateSignUp = (body) => {
   const schema = Joi.object().keys({
-    _id: Joi.string().required(),
+    _id: Joi.string(),
     displayName: Joi.string().required(),
     email: Joi.string().email().required(),
     phone: Joi.string().min(8).max(11).required(),
