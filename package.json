@@ -27,7 +27,9 @@
   },
   "homepage": "https://github.com/nguyenbinhanltv/EnQ-server#readme",
   "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.8",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/lodash": "^4.14.161",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

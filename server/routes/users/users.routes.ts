@@ -1,5 +1,8 @@
 import { Router } from "express";
 
+// Controller
+import * as adminController from "../../controllers/admin/admin.controller";
+
 class UsersRoutes {
   public routes: Router;
 
@@ -15,9 +18,9 @@ class UsersRoutes {
 
     // For admin
     this.routes.get("/admin/me");
-    this.routes.post("/admin", (req, res) => {});
-    this.routes.post("/admin/login", (req, res) => {});
-    this.routes.post("/admin/logout", (req, res) => {});
+    this.routes.post("/admin/signup", adminController.signUp);
+    this.routes.post("/admin/login", adminController.login);
+    this.routes.post("/admin/logedin", adminController.verifyToken, adminController.logedIn);
   }
 }
 

@@ -3,9 +3,13 @@ export {
   validateLogin,
   validateSignUp,
   comparePassword,
+  hashPassword,
+  isAdminAlreadyExists,
+  queryAdminData,
+  updateRefeshToken
 } from "./admin/admin.handler";
 
 export {
-  checkEmailAlreadyExists,
-  checkUserAlreadyExists,
+  isEmailAlreadyExists,
+  isUserAlreadyExists,
 } from "./users/users.handler";
