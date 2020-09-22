@@ -2,6 +2,7 @@ import { Router } from "express";
 
 // Controller
 import * as adminController from "../../controllers/admin/admin.controller";
+import * as userController from "../../controllers/users/users.controller";
 
 class UsersRoutes {
   public routes: Router;
@@ -13,8 +14,14 @@ class UsersRoutes {
 
   _init() {
     // For users normal
-    this.routes.get("/:userId", (req, res) => {});
-    this.routes.post("/", (req, res) => {});
+    this.routes.get("/:userId", );
+    this.routes.post("/", userController.createUser); // Create user data API
+    this.routes.patch("/:userId", ); // Update user data API
+    this.routes.delete("/:userId", ); 
+    /**
+     * @description
+     * Must has token to use this API
+     */
 
     // For admin
     this.routes.get("/admin/me");

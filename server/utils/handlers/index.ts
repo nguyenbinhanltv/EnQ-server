@@ -1,3 +1,4 @@
+// Admin
 export {
   validateConfirmPassword,
   validateLogin,
@@ -9,7 +10,9 @@ export {
   updateRefeshToken
 } from "./admin/admin.handler";
 
+// Users
 export {
   isEmailAlreadyExists,
   isUserAlreadyExists,
+  validateUser
 } from "./users/users.handler";

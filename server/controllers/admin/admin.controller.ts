@@ -49,7 +49,6 @@ export const signUp = async (req, res) => {
     // Check information
     const { value, error } = validateSignUp(body);
     if (error) {
-      console.log(error);
       return res.status(400).send(error);
     }
 

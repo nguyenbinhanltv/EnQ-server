@@ -3,11 +3,12 @@ import { TestExamHistory } from "./test-exam-history.model";
 export interface User {
   displayName: string; //string name
   email: string; //string gmail
-  _id: string; //string
+  _id?: string; //string
   photoURL: string; //string
-  rank: number; //number
-  point: number; //number
+  rank: number | 0; //number
+  point: number | 0; //number
   testExamHistory?: Array<TestExamHistory>;
+  friend?: Array<{_id: string}> // _id of User
 }
 
 /**
@@ -65,4 +66,12 @@ const user: User = {
       answers: [0, 1],
     },
   ],
+  friend: [
+    {
+      _id: "PLBzeFCT0PR7i1SQYBkb"
+    },
+    {
+      _id: "PLBzeFCT0PR7i1SQYBkb"
+    }
+  ]
 };
