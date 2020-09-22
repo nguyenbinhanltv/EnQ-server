@@ -58,4 +58,6 @@ export const getLeadersDay = async (req, res) => {
 };
 
 // Get leaders for week (Week)
-export const getLeadersWeek = (req, res) => {};
+export const getLeadersWeek = (req, res) => {
+  
+};
