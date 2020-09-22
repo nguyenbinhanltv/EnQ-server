@@ -34,23 +34,12 @@ export const createUser = async (req, res) => {
     }
 
     return firebaseHelper.firestore
-      .createNewDocument(db, collectionName, body)
-      .then((doc) => {
-        body._id = doc.id;
-
-        firebaseHelper.firestore
-          .updateDocument(db, collectionName, body._id, body)
-          .then((doc) =>
-            res.status(201).send({
-              massage: "Register successfully",
-            })
-          )
-          .catch((err) =>
-            res.status(400).send({
-              error: err,
-            })
-          );
-      })
+      .createDocumentWithID(db, collectionName, body._id, body)
+      .then((doc) =>
+        res.status(201).send({
+          massage: "Register successfully",
+        })
+      )
       .catch((err) =>
         res.status(400).send({
           error: err,
@@ -190,7 +179,7 @@ export const getAllUsers = async (req, res) => {
       .then((doc) =>
         res.status(200).send({
           massage: "Success",
-          data: doc,
+          data: users,
         })
       )
       .catch((err) =>

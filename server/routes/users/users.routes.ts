@@ -14,10 +14,11 @@ class UsersRoutes {
 
   _init() {
     // For users normal
-    this.routes.get("/:userId", );
+    this.routes.get("/", userController.getAllUsers)
+    this.routes.get("/:userId", userController.getUser);
     this.routes.post("/", userController.createUser); // Create user data API
-    this.routes.patch("/:userId", ); // Update user data API
-    this.routes.delete("/:userId", ); 
+    this.routes.patch("/:userId", userController.updateUser); // Update user data API
+    this.routes.delete("/:userId", userController.deleteUser);
     /**
      * @description
      * Must has token to use this API

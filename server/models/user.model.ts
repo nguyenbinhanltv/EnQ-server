@@ -1,4 +1,12 @@
-import { TestExamHistory } from "./test-exam-history.model";
+import { AnswerType } from "../utils/enum";
+import { TestExam } from "./test-exam.model";
+
+interface TestExamHistory {
+  timeStart: number; //Date seconds
+  timeEnd: number; //Date seconds
+  testExam: TestExam; //string
+  answers: Array<AnswerType>; //Array<Enum<A, B, C, D>>
+}
 
 export interface User {
   displayName: string; //string name
@@ -7,7 +15,7 @@ export interface User {
   photoURL: string; //string
   rank: number | 0; //number
   point: number | 0; //number
-  testExamHistory?: Array<TestExamHistory>;
+  testExamHistory?: Array<TestExamHistory>; //Maximum 5
   friend?: Array<{_id: string}> // _id of User
 }
 
@@ -24,7 +32,6 @@ const user: User = {
   point: 0,
   testExamHistory: [
     {
-      _id: "3ZfWPlCHVm4Alvzvfdly",
       timeStart: Date.now(),
       timeEnd: Date.now(),
       testExam: {
