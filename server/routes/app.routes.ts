@@ -1,7 +1,8 @@
 import { Router } from "express";
 
 //Routes
-import { usersRoutes } from './users/users.routes';
+import { usersRoutes } from "./users/users.routes";
+import { leadersRoutes } from "./leaders/leaders.routes";
 
 class AppRoutes {
   public routes: Router;
@@ -12,6 +13,7 @@ class AppRoutes {
 
   private _init() {
     this.routes.use("/users", usersRoutes);
+    this.routes.use("/leaders", leadersRoutes);
   }
 }
 

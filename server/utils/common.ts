@@ -11,3 +11,5 @@ export const isEmpty = (value) => _.isEmpty(value);
 export const isEqual = (value, other) => _.isEqual(value, other);
 
 export const clone = (value) => _.clone(value);
+
+export const pick = (object: object, keys: Array<string>) => _.pick(object, keys);

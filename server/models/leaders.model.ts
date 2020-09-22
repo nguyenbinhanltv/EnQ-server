@@ -3,7 +3,7 @@ import { LeadersType } from "../utils/enum";
 
 export interface Leaders {
   _id: string; //string
-  users: Array<User>; //Array<User>
+  users: Array<User>; //Array<User> doesn't have
   startAt: number; //Date seconds
   endAt: number; //Date seconds
   type: LeadersType; //day or week

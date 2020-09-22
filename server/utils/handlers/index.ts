@@ -16,3 +16,9 @@ export {
   isUserAlreadyExists,
   validateUser
 } from "./users/users.handler";
+
+// Leaders
+export {
+  queryLeadersByDay,
+  generateLeadersId
+} from "./leaders/leaders.handler";
