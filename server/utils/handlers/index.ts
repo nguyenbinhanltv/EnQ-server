@@ -22,5 +22,6 @@ export {
   queryLeadersByDay,
   generateLeadersDayId,
   generateLeadersWeekId,
-  validateLeaders
+  validateLeaders,
+  isAlreadyLeadersWeek
 } from "./leaders/leaders.handler";

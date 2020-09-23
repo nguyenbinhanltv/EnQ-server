@@ -30,23 +30,45 @@ export const queryLeadersByDay = async (db, collectionName) => {
     .catch((err) => "Fail to get leaders of day");
 };
 
+// Check today in range leaders week
+export const isAlreadyLeadersWeek = async (db, collectionName) => {
+  const leadersRef = db.collection(collectionName);
+  const today = Date.now();
+
+  return await leadersRef
+    .where("startAt", "<=", today)
+    .where("endAt", ">=", today)
+    .get()
+    .then((querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      return data;
+    })
+    .then((querySnapshot) => querySnapshot)
+    .catch((err) => "Fail to check leaders week");
+};
+
 // Generate leaders day key
 export const generateLeadersDayId = () => {
-    const key = new Date();
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  const key = new Date();
+  const options = { year: "numeric", month: "numeric", day: "numeric" };
 
-    const leadersId = key.toLocaleDateString("en-US",options).split("/");
-    return `${leadersId[0]}${leadersId[1]}${leadersId[2]}leadersDay`;
-}
+  const leadersId = key.toLocaleDateString("en-US", options).split("/");
+  return `${leadersId[0]}${leadersId[1]}${leadersId[2]}leadersDay`;
+};
 
 // Generate leaders week key
 export const generateLeadersWeekId = () => {
   const key = new Date();
-  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  const options = { year: "numeric", month: "numeric", day: "numeric" };
 
-  const leadersId = key.toLocaleDateString("en-US",options).split("/");
-  return `${leadersId[0]}${leadersId[1]}${leadersId[2]}leadersDay`;
-}
+  const leadersId = key.toLocaleDateString("en-US", options).split("/");
+  return `${leadersId[0]}${leadersId[1]}${leadersId[2]}${leadersId[0]}${
+    leadersId[1] + 7
+  }${leadersId[2]}leadersWeek`;
+};
 
 // Validate leaders
 export const validateLeaders = (body) => {
@@ -66,4 +88,4 @@ export const validateLeaders = (body) => {
   return {
     value,
   };
-}
+};
