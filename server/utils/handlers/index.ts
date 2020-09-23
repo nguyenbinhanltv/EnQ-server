@@ -20,5 +20,7 @@ export {
 // Leaders
 export {
   queryLeadersByDay,
-  generateLeadersId
+  generateLeadersDayId,
+  generateLeadersWeekId,
+  validateLeaders
 } from "./leaders/leaders.handler";

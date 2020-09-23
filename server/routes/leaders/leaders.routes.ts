@@ -13,6 +13,7 @@ class LeadersRoutes {
 
   _init() {
     this.routes.get("/day", leadersController.getLeadersDay);
+    this.routes.patch("/day", leadersController.updateLeadersDay);
     this.routes.get("/week", leadersController.getLeadersWeek);
   }
 }
