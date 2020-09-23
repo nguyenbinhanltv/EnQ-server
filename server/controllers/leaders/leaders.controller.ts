@@ -19,15 +19,8 @@ const collectionName = "leaders";
 
 // Get leaders in this time (Day)
 export const getLeadersDay = async (req, res) => {
-  const leadersDay = await queryLeadersByDay(db, "users");
 
   try {
-    if (typeof leadersDay == "string") {
-      return res.status(400).send({
-        error: "Invalid leaders",
-      });
-    }
-
     // Create id with this day
     const leadersId = generateLeadersDayId();
 
@@ -47,7 +40,7 @@ export const getLeadersDay = async (req, res) => {
           startAt: Math.floor(Date.now() / 1000),
           endAt: Math.floor(Date.now() / 1000) + 86400,
           type: 0,
-          users: leadersDay,
+          users: [],
         };
 
         return firebaseHelper.firestore
@@ -118,15 +111,8 @@ export const updateLeadersDay = async (req, res) => {
 
 // Get leaders for week (Week)
 export const getLeadersWeek = async (req, res) => {
-  const leadersWeek = await queryLeadersByDay(db, "users");
 
   try {
-    if (typeof leadersWeek == "string") {
-      return res.status(400).send({
-        error: "Invalid leaders",
-      });
-    }
-
     // Flag to check have leaders week in firestore
     const isLeadersWeekAlreadyExist = await isAlreadyLeadersWeek(
       db,
@@ -160,7 +146,7 @@ export const getLeadersWeek = async (req, res) => {
           startAt: Math.floor(Date.now() / 1000),
           endAt: Math.floor(Date.now() / 1000) + 604800,
           type: 1,
-          users: leadersWeek,
+          users: [],
         };
 
         return firebaseHelper.firestore
