@@ -1,9 +1,9 @@
 import * as admin from "firebase-admin";
 import * as Joi from "joi";
-import { pick } from "../../common";
+import { Leaders } from "../../../models/leaders.model";
+import { pick, inRange } from "../../common";
 
-const db = admin.firestore();
-
+// Query leaders
 export const queryLeadersByDay = async (db, collectionName) => {
   const leadersRef = db.collection(collectionName);
 
@@ -35,9 +35,8 @@ export const isAlreadyLeadersWeek = async (db, collectionName) => {
   const leadersRef = db.collection(collectionName);
   const today = Math.floor(Date.now() / 1000);
 
-  return await leadersRef
-    .where("startAt", "<=", today)
-    .where("endAt", ">=", today)
+  const snapshot: Array<Leaders> = await leadersRef
+    .where("type", "==", 1)
     .get()
     .then((querySnapshot) => {
       const data = [];
@@ -47,7 +46,13 @@ export const isAlreadyLeadersWeek = async (db, collectionName) => {
       return data;
     })
     .then((querySnapshot) => querySnapshot)
-    .catch((err) => "Fail to check leaders week");
+    .catch((err) => err);
+
+  for(let leader of snapshot) {
+    if (inRange(today, leader.startAt, leader.endAt)) {
+      return leader;
+    }
+  }
 };
 
 // Generate leaders day key

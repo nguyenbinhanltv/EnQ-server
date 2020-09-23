@@ -127,8 +127,19 @@ export const getLeadersWeek = async (req, res) => {
       });
     }
 
-    const zzz = await isAlreadyLeadersWeek(db, collectionName);
-    console.log(zzz);
+    // Flag to check have leaders week in firestore
+    const isLeadersWeekAlreadyExist = await isAlreadyLeadersWeek(
+      db,
+      collectionName
+    )
+      .then((doc) => doc)
+      .catch((err) => null);
+    if (isLeadersWeekAlreadyExist) {
+      return res.status(400).send({
+        message: "Leaders week already exist",
+        data: isLeadersWeekAlreadyExist,
+      });
+    }
 
     // Create id leaders week
     const leadersId = generateLeadersWeekId();
@@ -148,7 +159,7 @@ export const getLeadersWeek = async (req, res) => {
           _id: leadersId,
           startAt: Math.floor(Date.now() / 1000),
           endAt: Math.floor(Date.now() / 1000) + 604800,
-          type: 0,
+          type: 1,
           users: leadersWeek,
         };
 
