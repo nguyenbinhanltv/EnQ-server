@@ -169,3 +169,48 @@ export const getLeadersWeek = async (req, res) => {
     });
   }
 };
+
+// Update leaders week
+export const updateLeadersWeek = async (req, res) => {
+  const body: Leaders = req.body;
+
+  try {
+    // Check information leaders
+    const { value, error } = validateLeaders(body);
+    if (error) {
+      return res.status(400).send(error);
+    }
+
+    firebaseHelper.firestore
+      .checkDocumentExists(db, collectionName, body._id)
+      .then((result) => {
+        if (result.exists) {
+          return firebaseHelper.firestore
+            .updateDocument(db, collectionName, body._id, body)
+            .then((doc) =>
+              res.status(200).send({
+                message: "Update leaders week success",
+              })
+            )
+            .catch((err) =>
+              res.status(400).send({
+                error: err,
+              })
+            );
+        }
+
+        return res.status(400).send({
+          message: "Leaders week isn't exist",
+        });
+      })
+      .catch((err) =>
+        res.status({
+          error: err,
+        })
+      );
+  } catch (error) {
+    res.status(400).send({
+      error: error + ", Bad Error",
+    });
+  }
+};
