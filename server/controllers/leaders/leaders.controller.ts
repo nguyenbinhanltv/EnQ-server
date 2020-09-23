@@ -44,8 +44,8 @@ export const getLeadersDay = async (req, res) => {
         // Date leaders
         const data: Leaders = {
           _id: leadersId,
-          startAt: Date.now(),
-          endAt: Date.now() + 86400000,
+          startAt: Math.floor(Date.now() / 1000),
+          endAt: Math.floor(Date.now() / 1000) + 86400,
           type: 0,
           users: leadersDay,
         };
@@ -146,8 +146,8 @@ export const getLeadersWeek = async (req, res) => {
         // Date leaders
         const data: Leaders = {
           _id: leadersId,
-          startAt: Date.now(),
-          endAt: Date.now() + 604800000,
+          startAt: Math.floor(Date.now() / 1000),
+          endAt: Math.floor(Date.now() / 1000) + 604800,
           type: 0,
           users: leadersWeek,
         };

@@ -33,7 +33,7 @@ export const queryLeadersByDay = async (db, collectionName) => {
 // Check today in range leaders week
 export const isAlreadyLeadersWeek = async (db, collectionName) => {
   const leadersRef = db.collection(collectionName);
-  const today = Date.now();
+  const today = Math.floor(Date.now() / 1000);
 
   return await leadersRef
     .where("startAt", "<=", today)
