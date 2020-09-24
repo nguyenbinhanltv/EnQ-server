@@ -82,7 +82,7 @@ export const validateLeaders = (body) => {
     startAt: Joi.number().required(),
     endAt: Joi.number().required(),
     type: Joi.number().required(),
-    users: Joi.array().min(0).max(10).required(),
+    users: Joi.array().required(),
   });
   const { error, value } = schema.validate(body);
   if (error && error.details) {
