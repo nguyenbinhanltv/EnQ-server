@@ -16,8 +16,8 @@ export interface Leaders {
 // Leaders type DAY
 const leadersDay: Leaders = {
   _id: "9t3IrigkUum5c5u1WysQ",
-  startAt: Date.now(),
-  endAt: Date.now() + 86400,
+  startAt: Math.floor(Date.now() / 1000),
+  endAt: Math.floor(Date.now() / 1000) + 86400,
   type: 0,
   users: [
     {
@@ -36,8 +36,8 @@ const leadersDay: Leaders = {
 // Leaders type WEEK
 const leadersWeek: Leaders = {
   _id: "9t3IrigkUum5c5u1WysQ",
-  startAt: Date.now(),
-  endAt: Date.now() + 604800,
+  startAt: Math.floor(Date.now() / 1000),
+  endAt: Math.floor(Date.now() / 1000) + 604800,
   type: 1,
   users: [
     {
