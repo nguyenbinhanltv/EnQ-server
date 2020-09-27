@@ -8,18 +8,21 @@ interface Answer {
   correctAnswer: AnswerType; //A, B, C, D
 }
 
-export interface Question {
-  _id: string; //string
+export interface reqQuestion{
   title: string; //string
   type: QuestionType; //enum {GRAMMAR, VOCABULARY}
   rank: Rank; //enum {EASY, NORMAL, HARD}
   answer: Answer; //Array<Answer>
 }
 
+export interface resQuestion extends reqQuestion{
+  _id: string; //string
+}
+
 /**
  * @example
  */
-const question: Question = {
+const question: resQuestion = {
   _id: "EMfVyJXLS4BZMiyZredm",
   title: "Are there any flowers to the left of your house? _____________.",
   type: 0,
