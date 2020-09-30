@@ -78,7 +78,11 @@ export const deleteQuestionById = async (req, res) => {
 export const shuffleQuestion = async (req,res) => {
     let type = req.query.type.toUpperCase()
     if ( Object.keys(QuestionType).indexOf(type) != -1 ) {
+<<<<<<< HEAD
         return
+=======
+        return        
+>>>>>>> d82113a083ef90d2a622e2b9c7e10e75618687fe
     }
     return res.send('asdfsadasd')
 }
