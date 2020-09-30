@@ -11,12 +11,12 @@ class TestExamRoute {
 
    _init(){
         //admin
-        this.routes.get('/question',testController.getExamByID); // /question?id=123
+        this.routes.get('/question',testController.getQuestionByID); // /question?id=123
         this.routes.post('/add-question',testController.addQuestion);
-        this.routes.post('/edit-question');
-        this.routes.post('/delete-question');
+        this.routes.post('/edit-question',testController.editQuestionById);
+        this.routes.post('/delete-question',testController.deleteQuestionById);
         //mobile
-        this.routes.get('/get-test-exam');
+        this.routes.get('/get-test-exam',testController.shuffleQuestion);
 
    }
 }

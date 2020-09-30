@@ -3,6 +3,7 @@ import * as jwt from 'jsonwebtoken'
 import { resQuestion, reqQuestion } from '../../models/question.model'
 import { db } from './../../configs/database'
 import * as firebaseHelper from "firebase-functions-helper/dist";
+import { QuestionType } from "./../../utils/enum"
 
 const collectionName = 'questions'
 
@@ -17,37 +18,67 @@ export const addQuestion = (req, res) => {
     //     }
     // });
     let question: reqQuestion = req.body
-    
-    return firebaseHelper.firestore.createNewDocument(db,collectionName,question).then(()=>{
+
+    return firebaseHelper.firestore.createNewDocument(db, collectionName, question).then(() => {
         res.status(200).send({
             'message': 'Add question successfull!!!',
             'error': null
         })
-    }).catch(()=>{
+    }).catch(() => {
         console.log('Error when add questions')
         res.status(500).send('Add question error')
     })
 }
 
 
-export const getExamByID = (req, res) => {
-    let id = req.query.id;
+export const getQuestionByID = async (req, res) => {
+    let id: string = req.query.id;
     console.log(id)
-    if (id){
-        firebaseHelper.firestore.getDocument(db,collectionName,id).then((doc)=>{
-            if (doc) {
-                return res.send(doc.data);
-            }    
-            return res.status(400).send("Invalid ID")
-        })
+    if (id != undefined) {
+        let doc = await firebaseHelper.firestore.getDocument(db, collectionName, id)
+        if (doc) {
+            return res.send(doc)
+        }
     }
     return res.status(400).send('Id not valid')
 }
 
-export const getAllQuestion = (req, res) => {
-    res.send('getAllQuestion')
+export const editQuestionById = async (req, res) => {
+    let data: reqQuestion = req.body;
+    let id = req.query.id
+    if (id) {
+        let doc = await firebaseHelper.firestore.getDocument(db, collectionName, id);
+        if (doc) {
+            for (let i in data) {
+                doc.answer[i] = data[i]
+            }
+            db.collection(collectionName).doc(id).update(doc).then(() => {
+                res.send("update successful")
+            }).catch(error => {
+                console.log(error)
+                res.status(500).send("Update error")
+            })
+        }
+    } else {
+        return res.send('getAllQuestion')
+    }
+
 }
 
-export const getQuestionByID = (req, res) => {
-    res.send('get question by id')
+export const deleteQuestionById = async (req, res) => {
+    let id = req.query.id
+    if (id) {
+        await firebaseHelper.firestore.deleteDocument(db,collectionName,id)
+        res.send("Delete success!!!")
+    }else{
+        return res.status(400).send("Id invalid")
+    }
+}
+
+export const shuffleQuestion = async (req,res) => {
+    let type = req.query.type.toUpperCase()
+    if ( Object.keys(QuestionType).indexOf(type) != -1 ) {
+        return        
+    }
+    return res.send('asdfsadasd')
 }
