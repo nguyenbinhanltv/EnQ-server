@@ -7,14 +7,14 @@ export {
   hashPassword,
   isAdminAlreadyExists,
   queryAdminData,
-  updateRefeshToken
+  updateRefeshToken,
 } from "./admin/admin.handler";
 
 // Users
 export {
   isEmailAlreadyExists,
   isUserAlreadyExists,
-  validateUser
+  validateUser,
 } from "./users/users.handler";
 
 // Leaders
@@ -23,5 +23,11 @@ export {
   generateLeadersDayId,
   generateLeadersWeekId,
   validateLeaders,
-  isAlreadyLeadersWeek
+  isAlreadyLeadersWeek,
 } from "./leaders/leaders.handler";
+
+// Questions
+export {
+  validateQuestion,
+  isAlreadyQuestion,
+} from "./questions/questions.handler";

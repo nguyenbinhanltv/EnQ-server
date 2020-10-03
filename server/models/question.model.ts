@@ -16,14 +16,14 @@ export interface reqQuestion{
 }
 
 export interface resQuestion extends reqQuestion{
-  id: string; //string
+  _id: string; //string
 }
 
 /**
  * @example
  */
 const question: resQuestion = {
-  id: "EMfVyJXLS4BZMiyZredm",
+  _id: "EMfVyJXLS4BZMiyZredm",
   title: "Are there any flowers to the left of your house? _____________.",
   type: 0,
   rank: 0,
