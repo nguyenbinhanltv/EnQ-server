@@ -5,11 +5,10 @@ import * as cors from "cors";
 
 // Key firebase
 import * as serviceAccount from "./serviceAccount.json";
-import { FireStore ,db} from './configs/database'
+import { db } from "./configs/database";
 
 // Config
-import './configs/config.ts';
-
+import "./configs/config.ts";
 
 // Routes
 import { appRoutes } from "./routes/app.routes";
@@ -28,7 +27,7 @@ class ExpressApp {
     this.app.use(cors());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
-    db
+    db;
   }
 }
 

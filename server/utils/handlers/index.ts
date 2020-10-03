@@ -30,4 +30,6 @@ export {
 export {
   validateQuestion,
   isAlreadyQuestion,
+  getAllQuestions,
+  getRandomQuestions
 } from "./questions/questions.handler";

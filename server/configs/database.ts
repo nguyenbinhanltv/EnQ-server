@@ -12,7 +12,6 @@ export class FireStore {
   }
   db;
   __init__() {
-    console.log("init Firestore");
     this.db = admin.firestore();
   }
 }

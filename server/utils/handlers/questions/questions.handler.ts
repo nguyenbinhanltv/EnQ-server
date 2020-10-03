@@ -20,8 +20,33 @@ export const validateQuestion = (body) => {
   return {
     value,
   };
-}
+};
 
-export const isAlreadyQuestion = (body) => {
+export const isAlreadyQuestion = (body) => {};
 
-}
+export const getAllQuestions = async (db, collectionName) => {
+
+  const questionsRef = db.collection(collectionName);
+  const snapshot: Array<resQuestion> = await questionsRef
+    .where("type", "==", 0)
+    .get()
+    .then((querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      return data;
+    })
+    .then((querySnapshot) => querySnapshot)
+    .catch((err) => err);
+  return snapshot;
+};
+
+export const getRandomQuestions = (questions) => {
+  let data: Array<resQuestion> = [];
+  for (let i = 0; i < 10; i++) {
+    data.push(questions[Math.floor(Math.random() * questions.length)]);
+  }
+
+  return data;
+};

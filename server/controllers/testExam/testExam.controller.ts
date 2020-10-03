@@ -1,15 +1,18 @@
 // import {TestExam} from '../../models/test-exam.model'
 import * as jwt from "jsonwebtoken";
 import { resQuestion, reqQuestion } from "../../models/question.model";
-import { db } from "./../../configs/database";
+import * as admin from "firebase-admin";
 import * as firebaseHelper from "firebase-functions-helper/dist";
 import { QuestionType } from "./../../utils/enum";
 import {
   validateQuestion,
   isAlreadyQuestion,
+  getAllQuestions,
+  getRandomQuestions,
 } from "../../utils/handlers/index";
 
 const collectionName = "questions";
+const db = admin.firestore();
 
 export const addQuestion = async (req, res) => {
   const token = req.headers["token"];
@@ -66,12 +69,12 @@ export const addQuestion = async (req, res) => {
 };
 
 export const getQuestionByID = async (req, res) => {
-  const id: string = req.query.id;
+  const _id: string = req.params.questionId;
 
   try {
-    if (id != undefined) {
+    if (_id != undefined) {
       return await firebaseHelper.firestore
-        .getDocument(db, collectionName, id)
+        .getDocument(db, collectionName, _id)
         .then((doc) =>
           res.status(200).send({
             message: "OK",
@@ -92,8 +95,8 @@ export const getQuestionByID = async (req, res) => {
 };
 
 export const editQuestionById = async (req, res) => {
-  let body: resQuestion = req.body;
-  let id = req.query.id;
+  const body: reqQuestion = req.body;
+  const _id = req.params.questionId;
 
   try {
     const { value, error } = validateQuestion(body);
@@ -104,7 +107,7 @@ export const editQuestionById = async (req, res) => {
     }
     if (value) {
       return firebaseHelper.firestore
-        .updateDocument(db, collectionName, body._id, body)
+        .updateDocument(db, collectionName, _id, body)
         .then((doc) =>
           res.status(200).send({
             message: "Update successfully",
@@ -124,15 +127,15 @@ export const editQuestionById = async (req, res) => {
 };
 
 export const deleteQuestionById = async (req, res) => {
-  let id = req.query.id;
+  const _id = req.params.id;
   try {
-    if (id) {
+    if (_id) {
       return firebaseHelper.firestore
-        .checkDocumentExists(db, collectionName, id)
+        .checkDocumentExists(db, collectionName, _id)
         .then((result) => {
           if (result.exists) {
             return firebaseHelper.firestore
-              .deleteDocument(db, collectionName, id)
+              .deleteDocument(db, collectionName, _id)
               .then(() =>
                 res.status(200).send({
                   message: "Delete question successfully",
@@ -165,9 +168,26 @@ export const deleteQuestionById = async (req, res) => {
 };
 
 export const shuffleQuestion = async (req, res) => {
-  let type = req.query.type.toUpperCase();
-  if (Object.keys(QuestionType).indexOf(type) != -1) {
-    return;
+  const questions: Array<resQuestion> = await getAllQuestions(
+    db,
+    "questions"
+  )
+    .then((data) => data)
+    .catch((err) => null);
+  try {
+    if (questions) {
+      let data = getRandomQuestions(questions);
+      return res.status(200).send({
+        message: "OK",
+        data: data,
+      });
+    }
+    return res.send({
+      error: "No test exam for you :D",
+    });
+  } catch (error) {
+    return res.status(400).send({
+      error: error + " ,Bad Error",
+    });
   }
-  return res.send("asdfsadasd");
 };
