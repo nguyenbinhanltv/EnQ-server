@@ -3,7 +3,8 @@ import * as jwt from 'jsonwebtoken'
 import { resQuestion, reqQuestion } from '../../models/question.model'
 import { db } from './../../configs/database'
 import * as firebaseHelper from "firebase-functions-helper/dist";
-import { QuestionType } from "./../../utils/enum"
+import { QuestionType,Rank } from "./../../utils/enum"
+import { shuffleQuestions } from '../../utils/handlers/exam/exam.handler'
 
 const collectionName = 'questions'
 
@@ -75,14 +76,39 @@ export const deleteQuestionById = async (req, res) => {
     }
 }
 
-export const shuffleQuestion = async (req,res) => {
+export const getExam = async (req,res) => {
     let type = req.query.type.toUpperCase()
-    if ( Object.keys(QuestionType).indexOf(type) != -1 ) {
-<<<<<<< HEAD
-        return
-=======
-        return        
->>>>>>> d82113a083ef90d2a622e2b9c7e10e75618687fe
+    let easyQuestions = []
+    let normalQuestions = []
+    let hardQuestions = []
+    let defaultResponse = {
+        'error': null,
+        'exam': []
     }
-    return res.send('asdfsadasd')
+
+
+    if (Object.keys(QuestionType).indexOf(type) != -1) {
+       await db.collection(collectionName).get()
+            .then(querySnapshot => {
+                querySnapshot.docs.map(doc => {
+                    let questions = doc.data()
+                    if (questions.type === type) {
+                        if (questions.rank == Rank.HARD) {
+                            hardQuestions.push(questions)
+                        } else if (questions.rank == Rank.NORMAL) {
+                            normalQuestions.push(questions)
+                        } else {
+                            easyQuestions.push(questions)
+                        }
+                    }
+                });
+            });
+        easyQuestions = await shuffleQuestions(easyQuestions);
+        normalQuestions = await shuffleQuestions(normalQuestions);
+        hardQuestions = await shuffleQuestions(hardQuestions);
+        defaultResponse.exam = easyQuestions.concat(normalQuestions,hardQuestions)
+        return res.send(defaultResponse);
+    }else{
+        return res.send('Question Type invalid')
+    }
 }
