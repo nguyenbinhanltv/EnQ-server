@@ -16,7 +16,8 @@ class TestExamRoute {
     this.routes.post("/question/:questionId", testController.editQuestionById);
     this.routes.delete("/question/:questionId", testController.deleteQuestionById);
     //mobile
-    this.routes.get("/test-exam", testController.shuffleQuestion);
+    this.routes.get("/test-exam-rank", testController.getTestExamByRank);
+    this.routes.get("/test-exam-type", testController.getTestExamByType);
   }
 }
 

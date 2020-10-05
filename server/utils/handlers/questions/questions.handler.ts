@@ -24,11 +24,10 @@ export const validateQuestion = (body) => {
 
 export const isAlreadyQuestion = (body) => {};
 
-export const getAllQuestions = async (db, collectionName) => {
-
+export const getAllQuestionsByRank = async (db, collectionName, rank) => {
   const questionsRef = db.collection(collectionName);
   const snapshot: Array<resQuestion> = await questionsRef
-    .where("type", "==", 0)
+    .where("rank", "==", rank)
     .get()
     .then((querySnapshot) => {
       const data = [];
@@ -42,10 +41,29 @@ export const getAllQuestions = async (db, collectionName) => {
   return snapshot;
 };
 
-export const getRandomQuestions = (questions) => {
+export const getAllQuestionsByType = async (db, collectionName, type) => {
+  const questionsRef = db.collection(collectionName);
+  const snapshot: Array<resQuestion> = await questionsRef
+    .where("type", "==", type)
+    .get()
+    .then((querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      return data;
+    })
+    .then((querySnapshot) => querySnapshot)
+    .catch((err) => err);
+  return snapshot;
+};
+
+export const getRandomQuestions = (questions: Array<resQuestion>) => {
   let data: Array<resQuestion> = [];
-  for (let i = 0; i < 10; i++) {
-    data.push(questions[Math.floor(Math.random() * questions.length)]);
+  if (questions.length > 10) {
+    for (let i = 0; i < 10; i++) {
+      data.push(questions[Math.floor(Math.random() * questions.length)]);
+    }
   }
 
   return data;

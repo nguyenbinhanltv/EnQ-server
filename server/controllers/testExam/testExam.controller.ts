@@ -7,7 +7,8 @@ import { QuestionType } from "./../../utils/enum";
 import {
   validateQuestion,
   isAlreadyQuestion,
-  getAllQuestions,
+  getAllQuestionsByRank,
+  getAllQuestionsByType,
   getRandomQuestions,
 } from "../../utils/handlers/index";
 
@@ -167,10 +168,39 @@ export const deleteQuestionById = async (req, res) => {
   }
 };
 
-export const shuffleQuestion = async (req, res) => {
-  const questions: Array<resQuestion> = await getAllQuestions(
+export const getTestExamByType = async (req, res) => {
+  const type: number = req.query.type;
+  const questions: Array<resQuestion> = await getAllQuestionsByType(
     db,
-    "questions"
+    "questions",
+    type
+  )
+    .then((data) => data)
+    .catch((err) => null);
+  try {
+    if (questions) {
+      let data = getRandomQuestions(questions);
+      return res.status(200).send({
+        message: "OK",
+        data: data,
+      });
+    }
+    return res.send({
+      error: "No test exam for you :D",
+    });
+  } catch (error) {
+    return res.status(400).send({
+      error: error + " ,Bad Error",
+    });
+  }
+};
+
+export const getTestExamByRank = async (req, res) => {
+  const rank: string = req.query.rank;
+  const questions: Array<resQuestion> = await getAllQuestionsByRank(
+    db,
+    "questions",
+    rank
   )
     .then((data) => data)
     .catch((err) => null);
