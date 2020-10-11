@@ -1,9 +1,9 @@
-import { Question } from "./question.model";
+import { resQuestion } from "./question.model";
 import { Rank, QuestionType } from '../utils/enum';
 
 export interface TestExam {
   _id: string; //string
-  questions: Array<Question>; //Array<Question>
+  questions: Array<resQuestion>; //Array<Question>
   type: QuestionType; //enum {GRAMMAR, VOCABULARY}
   rank: Rank; //enum {EASY, NORMAL, HARD}
 }

@@ -12,7 +12,7 @@ export interface reqQuestion{
   title: string; //string
   type: QuestionType; //enum {GRAMMAR, VOCABULARY}
   rank: Rank; //enum {EASY, NORMAL, HARD}
-  answers: Answer; //Array<Answer>
+  answer: Answer; //Answer
 }
 
 export interface resQuestion extends reqQuestion{
@@ -27,7 +27,7 @@ const question: resQuestion = {
   title: "Are there any flowers to the left of your house? _____________.",
   type: 0,
   rank: 0,
-  answers: {
+  answer: {
     A: "Yes, there are",
     B: " Yes, there is",
     C: "No, there isn’t",
