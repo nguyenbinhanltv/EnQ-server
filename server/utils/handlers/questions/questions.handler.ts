@@ -5,10 +5,10 @@ import { pick, inRange } from "../../common";
 
 export const validateQuestion = (body) => {
   const schema = Joi.object().keys({
-    title: Joi.number().required(),
-    type: Joi.string().required(),
+    title: Joi.string().required(),
+    type: Joi.number().required(),
     rank: Joi.number().required(),
-    answers: Joi.array().required(),
+    answer: Joi.object().required(),
   });
 
   const { error, value } = schema.validate(body);

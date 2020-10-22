@@ -4,7 +4,7 @@ import { TestExam } from "./test-exam.model";
 interface TestExamHistory {
   timeStart: number; //Date seconds
   timeEnd: number; //Date seconds
-  testExam: TestExam; //string
+  testExam: TestExam;
   answers: Array<AnswerType>; //Array<Enum<A, B, C, D>>
 }
 
