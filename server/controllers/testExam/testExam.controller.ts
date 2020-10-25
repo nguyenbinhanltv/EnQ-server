@@ -95,6 +95,11 @@ export const getQuestionByID = async (req, res) => {
   }
 };
 
+export const getAllquestion = async (req, res) => {
+  const questionsRef = await db.collection("questions").get();
+  questionsRef.docs.map(doc => console.log(doc.data));
+}
+
 export const editQuestionById = async (req, res) => {
   const body: reqQuestion = req.body;
   const _id = req.params.questionId;
@@ -128,7 +133,7 @@ export const editQuestionById = async (req, res) => {
 };
 
 export const deleteQuestionById = async (req, res) => {
-  const _id = req.params.id;
+  const _id = req.params.questionId;
   try {
     if (_id) {
       return firebaseHelper.firestore

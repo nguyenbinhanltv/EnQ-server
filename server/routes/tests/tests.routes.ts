@@ -12,6 +12,7 @@ class TestExamRoute {
   _init() {
     //admin
     this.routes.get("/question/:questionId", testController.getQuestionByID);
+    this.routes.get("question/all", testController.getAllquestion);
     this.routes.post("/question", testController.addQuestion);
     this.routes.post("/question/:questionId", testController.editQuestionById);
     this.routes.delete("/question/:questionId", testController.deleteQuestionById);
