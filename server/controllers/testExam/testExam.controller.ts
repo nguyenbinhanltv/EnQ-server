@@ -96,8 +96,25 @@ export const getQuestionByID = async (req, res) => {
 };
 
 export const getAllquestion = async (req, res) => {
-  const questionsRef = await db.collection("questions").get();
-  questionsRef.docs.map(doc => console.log(doc.data));
+  let data = [];
+  const questionsRef = db.collection(collectionName);
+  try {
+    await questionsRef.get()
+        .then(snapshot => snapshot.forEach(doc => {
+          data.push(doc.data());
+        }))
+        .then(doc => res.status(200).send({
+          message: "OK",
+          data: data
+        }))
+        .catch(err => res.status(400).send({
+          message: 'Error'
+        }));
+  } catch (err) {
+    res.status(400).send({
+      message: err
+    });
+  }
 }
 
 export const editQuestionById = async (req, res) => {
