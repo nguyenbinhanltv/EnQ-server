@@ -100,19 +100,29 @@ export const getAllquestion = async (req, res) => {
   const questionsRef = db.collection(collectionName);
   try {
     await questionsRef.get()
-        .then(snapshot => snapshot.forEach(doc => {
-          data.push(doc.data());
-        }))
-        .then(doc => res.status(200).send({
-          message: "OK",
-          data: data
-        }))
-        .catch(err => res.status(400).send({
-          message: 'Error'
-        }));
+          .then(snapshot => {
+            if (snapshot.empty) {
+              res.status(400).send({
+                error: "No question for you"
+              })
+            } else {
+              snapshot.forEach(doc => data.push(doc.data()));
+            }
+          })
+          .then(() => {
+            res.status(200).send({
+              message: "OK",
+              data: data
+            })
+          })
+          .catch(err => {
+            res.status(400).send({
+              error: "Error form snapshot"
+            })
+          })
   } catch (err) {
     res.status(400).send({
-      message: err
+      error: err + " , Bad Error"
     });
   }
 }

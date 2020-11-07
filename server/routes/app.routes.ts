@@ -13,9 +13,14 @@ class AppRoutes {
   }
 
   private _init() {
-    this.routes.use("/users", usersRoutes);
-    this.routes.use("/leaders", leadersRoutes);
-    this.routes.use("/test", testExamRoutes);
+    this.routes.use("/v1/users", usersRoutes);
+    this.routes.use("/v1/leaders", leadersRoutes);
+    this.routes.use("/v1/test", testExamRoutes);
+    this.routes.get("/", (req, res) => {
+      res.send({
+        message: "This API for English and Quiz app version 1.0 ^^"
+      })
+    });
   }
 }
 
