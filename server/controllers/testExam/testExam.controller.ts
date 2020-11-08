@@ -139,18 +139,29 @@ export const editQuestionById = async (req, res) => {
       });
     }
     if (value) {
-      return firebaseHelper.firestore
-        .updateDocument(db, collectionName, _id, body)
-        .then((doc) =>
-          res.status(200).send({
-            message: "Update successfully",
-          })
-        )
-        .catch((err) =>
-          res.status(400).send({
-            error: "Invalid question",
-          })
-        );
+      return firebaseHelper
+            .firestore
+            .checkDocumentExists(db, collectionName, _id)
+            .then(result => {
+              if (result.exists) {
+                return firebaseHelper.firestore
+                .updateDocument(db, collectionName, _id, body)
+                .then((doc) =>
+                  res.status(200).send({
+                    message: "Update successfully",
+                  })
+                )
+                .catch((err) =>
+                  res.status(400).send({
+                    error: "Invalid question",
+                  })
+                );
+              }
+
+              return res.status(400).send({
+                error: "Invalid question",
+              });
+            });
     }
   } catch (error) {
     return res.status(400).send({
