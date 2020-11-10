@@ -23,31 +23,43 @@ export const createUser = async (req, res) => {
     // Check user with email
     if (await isEmailAlreadyExists(db, collectionName, body.email)) {
       return res.status(400).send({
-        massage: "This user is already exist",
+        message: "This user is already exist",
+        error: null,
+        data: null,
       });
     }
 
     // Check validate body
     const { value, error } = validateUser(body);
     if (error) {
-      return res.status(400).send(error);
+      return res.status(400).send({
+        error: error,
+        message: null,
+        data: null,
+      });
     }
 
     return firebaseHelper.firestore
       .createDocumentWithID(db, collectionName, body._id, body)
       .then((doc) =>
         res.status(201).send({
-          massage: "Register successfully",
+          message: "Register successfully",
+          error: null,
+          data: null,
         })
       )
       .catch((err) =>
         res.status(400).send({
           error: err,
+          message: null,
+          data: null,
         })
       );
   } catch (error) {
     res.status(400).send({
       error: error + ", Bad error",
+      message: null,
+      data: null,
     });
   }
 };
@@ -59,7 +71,11 @@ export const updateUser = async (req, res) => {
   try {
     const { value, error } = validateUser(body);
     if (error) {
-      return res.status(400).send(error);
+      return res.status(400).send({
+        error: error,
+        message: null,
+        data: null,
+      });
     }
 
     if (await isUserAlreadyExists(db, collectionName, body._id)) {
@@ -67,22 +83,30 @@ export const updateUser = async (req, res) => {
         .updateDocument(db, collectionName, body._id, body)
         .then((doc) =>
           res.status(200).send({
-            massage: `Update user ${body._id}:${body.email} successfully`,
+            message: `Update user ${body._id}:${body.email} successfully`,
+            error: null,
+            data: null,
           })
         )
         .catch((err) =>
           res.status(400).send({
             error: err,
+            message: null,
+            data: null,
           })
         );
     } else {
       res.status(400).send({
         error: "This user doesn't exist",
+        message: null,
+        data: null,
       });
     }
   } catch (error) {
     res.status(400).send({
       error: error + ", Bad Error",
+      message: null,
+      data: null,
     });
   }
 };
@@ -96,6 +120,8 @@ export const deleteUser = async (req, res) => {
     if (userId == undefined) {
       return res.status(400).send({
         error: "Must has userId in body",
+        message: null,
+        data: null,
       });
     }
 
@@ -103,6 +129,8 @@ export const deleteUser = async (req, res) => {
     if ((await isUserAlreadyExists(db, collectionName, userId)) == false) {
       return res.status(400).send({
         error: `Doesn't has user ${userId}`,
+        message: null,
+        data: null,
       });
     }
 
@@ -110,17 +138,23 @@ export const deleteUser = async (req, res) => {
       .deleteDocument(db, collectionName, userId)
       .then((doc) =>
         res.status(200).send({
-          massage: `Delete user ${userId} successfully`,
+          message: `Delete user ${userId} successfully`,
+          error: null,
+          data: null,
         })
       )
       .catch((err) =>
         res.status(400).send({
           error: err,
+          message: null,
+          data: null,
         })
       );
   } catch (error) {
     res.status(400).send({
       error: error + ", Bad Error",
+      message: null,
+      data: null,
     });
   }
 };
@@ -134,6 +168,8 @@ export const getUser = async (req, res) => {
     if (userId == undefined) {
       return res.status(400).send({
         error: "Must has userId in body",
+        message: null,
+        data: null,
       });
     }
 
@@ -141,6 +177,8 @@ export const getUser = async (req, res) => {
     if ((await isUserAlreadyExists(db, collectionName, userId)) == false) {
       return res.status(400).send({
         error: `Doesn't has user ${userId}`,
+        message: null,
+        data: null,
       });
     }
 
@@ -148,18 +186,23 @@ export const getUser = async (req, res) => {
       .getDocument(db, collectionName, userId)
       .then((doc) =>
         res.status(200).send({
-          massage: "Success",
+          message: "Success",
           data: doc,
+          error: null,
         })
       )
       .catch((err) =>
         res.status(400).send({
           error: err,
+          message: null,
+          data: null,
         })
       );
   } catch (error) {
     res.status(400).send({
       error: error + ", Bad Error",
+      message: null,
+      data: null,
     });
   }
 };
@@ -178,18 +221,23 @@ export const getAllUsers = async (req, res) => {
       )
       .then((doc) =>
         res.status(200).send({
-          massage: "Success",
+          message: "Success",
           data: users,
+          error: null,
         })
       )
       .catch((err) =>
         res.status(400).send({
           error: err,
+          message: null,
+          data: null,
         })
       );
   } catch (error) {
     res.status(400).send({
       error: error + ", Bad Error",
+      message: null,
+      data: null,
     });
   }
 };

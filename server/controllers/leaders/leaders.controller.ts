@@ -31,6 +31,7 @@ export const getLeadersDay = async (req, res) => {
           return res.status(400).send({
             message: "Leaders today already exist",
             data: result.data,
+            error: null
           });
         }
 
@@ -49,17 +50,22 @@ export const getLeadersDay = async (req, res) => {
             res.status(200).send({
               message: "Success",
               data: data,
+              error: null
             })
           )
           .catch((err) =>
             res.status(400).send({
               error: err,
+              message: null,
+              data: null
             })
           );
       });
   } catch (error) {
     res.status(400).send({
       error: error + ", Bad Error",
+      message: null,
+      data: null
     });
   }
 };
@@ -84,27 +90,37 @@ export const updateLeadersDay = async (req, res) => {
             .then((doc) =>
               res.status(200).send({
                 message: "Update leaders day success",
+                data: null,
+                error: null,
               })
             )
             .catch((err) =>
               res.status(400).send({
                 error: err,
+                message: null,
+                data: null,
               })
             );
         }
 
         return res.status(400).send({
           message: "Leaders day isn't exist",
+          data: null,
+          error: null,
         });
       })
       .catch((err) =>
         res.status({
           error: err,
+          data: null,
+          message: null
         })
       );
   } catch (error) {
     res.status(400).send({
       error: error + ", Bad Error",
+      data: null,
+      message: null
     });
   }
 };
@@ -124,6 +140,7 @@ export const getLeadersWeek = async (req, res) => {
       return res.status(400).send({
         message: "Leaders week already exist",
         data: isLeadersWeekAlreadyExist,
+        error: null
       });
     }
 
@@ -137,6 +154,7 @@ export const getLeadersWeek = async (req, res) => {
           return res.status(400).send({
             message: "Leaders week already exist",
             data: result.data,
+            error: null
           });
         }
 
@@ -155,17 +173,22 @@ export const getLeadersWeek = async (req, res) => {
             res.status(200).send({
               message: "Success",
               data: data,
+              error: null,
             })
           )
           .catch((err) =>
             res.status(400).send({
               error: err,
+              data: null,
+              message: null
             })
           );
       });
   } catch (error) {
     res.status(400).send({
       error: error + ", Bad Error",
+      data: null,
+      message: null
     });
   }
 };
@@ -178,7 +201,11 @@ export const updateLeadersWeek = async (req, res) => {
     // Check information leaders
     const { value, error } = validateLeaders(body);
     if (error) {
-      return res.status(400).send(error);
+      return res.status(400).send({
+        error: error,
+        message: null,
+        data: null,
+      });
     }
 
     firebaseHelper.firestore
@@ -190,27 +217,37 @@ export const updateLeadersWeek = async (req, res) => {
             .then((doc) =>
               res.status(200).send({
                 message: "Update leaders week success",
+                data: null,
+                error: null,
               })
             )
             .catch((err) =>
               res.status(400).send({
                 error: err,
+                message: null,
+                data: null,
               })
             );
         }
 
         return res.status(400).send({
           message: "Leaders week isn't exist",
+          data: null,
+          error: null,
         });
       })
       .catch((err) =>
         res.status({
           error: err,
+          data: null,
+          message: null
         })
       );
   } catch (error) {
     res.status(400).send({
       error: error + ", Bad Error",
+      message: null,
+      data: null
     });
   }
 };

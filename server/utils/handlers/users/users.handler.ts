@@ -32,7 +32,8 @@ export const validateUser = (body: User) => {
     point: Joi.number().integer().min(0).max(Number.MAX_SAFE_INTEGER),
     rank: Joi.number().integer().min(0).max(Number.MAX_SAFE_INTEGER),
     testExamHistory: Joi.array().min(0).max(5),
-    friend: Joi.array()
+    friend: Joi.array(),
+    timeCreate: Joi.string().required()
   });
 
   const { error, value } = schema.validate(body);

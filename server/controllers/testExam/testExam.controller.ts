@@ -25,13 +25,19 @@ export const addQuestion = async (req, res) => {
         if (error) {
           return res.status(400).send({
             error: "Invalid token",
+            data: null,
+            message: null,
           });
         }
 
         if (adminData) {
           const { value, error } = validateQuestion(body);
           if (error) {
-            return res.status(400).send(error);
+            return res.status(400).send({
+              error: error,
+              data: null,
+              message: null,
+            });
           }
           if (value) {
             return firebaseHelper.firestore
@@ -45,17 +51,22 @@ export const addQuestion = async (req, res) => {
                     res.status(200).send({
                       message: "Add question successfully",
                       error: null,
+                      data: null,
                     });
                   })
                   .catch((error) =>
                     res.status(400).send({
                       error: error,
+                      message: null,
+                      data: null,
                     })
                   );
               })
               .catch((error) => {
                 return res.status(400).send({
                   error: "Add question error" + error,
+                  data: null,
+                  message: null,
                 });
               });
           }
@@ -65,6 +76,8 @@ export const addQuestion = async (req, res) => {
   } catch (error) {
     return res.status(400).send({
       error: error + " ,Bad Error",
+      data: null,
+      message: null,
     });
   }
 };
@@ -80,17 +93,22 @@ export const getQuestionByID = async (req, res) => {
           res.status(200).send({
             message: "OK",
             data: doc,
+            error: null
           })
         )
         .catch((error) =>
           res.status(400).send({
             error: "Invalid question",
+            data: null,
+            message: null,
           })
         );
     }
   } catch (error) {
     return res.status(400).send({
       error: "Id not valid",
+      message: null,
+      data: null,
     });
   }
 };
@@ -103,7 +121,9 @@ export const getAllquestion = async (req, res) => {
           .then(snapshot => {
             if (snapshot.empty) {
               res.status(400).send({
-                error: "No question for you"
+                error: "No question for you",
+                data: null,
+                message: null,
               })
             } else {
               snapshot.forEach(doc => data.push(doc.data()));
@@ -112,17 +132,22 @@ export const getAllquestion = async (req, res) => {
           .then(() => {
             res.status(200).send({
               message: "OK",
-              data: data
+              data: data,
+              error: null,
             })
           })
           .catch(err => {
             res.status(400).send({
-              error: "Error form snapshot"
+              error: "Error form snapshot",
+              data: null,
+              message: null,
             })
           })
   } catch (err) {
     res.status(400).send({
-      error: err + " , Bad Error"
+      error: err + " , Bad Error",
+      data: null,
+      message: null,
     });
   }
 }
@@ -136,6 +161,8 @@ export const editQuestionById = async (req, res) => {
     if (error) {
       return res.status(400).send({
         error: "Invalid question",
+        data: null,
+        message: null,
       });
     }
     if (value) {
@@ -149,23 +176,31 @@ export const editQuestionById = async (req, res) => {
                 .then((doc) =>
                   res.status(200).send({
                     message: "Update successfully",
+                    data: null,
+                    error: null,
                   })
                 )
                 .catch((err) =>
                   res.status(400).send({
                     error: "Invalid question",
+                    data: null,
+                    message: null,
                   })
                 );
               }
 
               return res.status(400).send({
                 error: "Invalid question",
+                data: null,
+                message: null
               });
             });
     }
   } catch (error) {
     return res.status(400).send({
       error: error + " Bad Error",
+      data: null,
+      message: null,
     });
   }
 };
@@ -183,30 +218,44 @@ export const deleteQuestionById = async (req, res) => {
               .then(() =>
                 res.status(200).send({
                   message: "Delete question successfully",
+                  data: null,
+                  error: null,
                 })
               )
               .catch((err) =>
                 res.status(400).send({
                   error: err,
+                  data: null,
+                  message: null,
                 })
               );
           }
 
           return res.status(400).send({
             error: "Doesn't have question",
+            data: null,
+            message: null,
           });
         })
         .catch((err) =>
           res.status(400).send({
             error: err,
+            data: null,
+            message: null,
           })
         );
     } else {
-      return res.status(400).send("Id invalid");
+      return res.status(400).send({
+        error: "Id invalid",
+        message: null,
+        data: null,
+      });
     }
   } catch (error) {
     return res.status(400).send({
       error: error + " ,Bad Error",
+      data: null,
+      message: null,
     });
   }
 };
@@ -226,14 +275,19 @@ export const getTestExamByType = async (req, res) => {
       return res.status(200).send({
         message: "OK",
         data: data,
+        error: null,
       });
     }
     return res.send({
       error: "No test exam for you :D",
+      message: null,
+      data: null,
     });
   } catch (error) {
     return res.status(400).send({
       error: error + " ,Bad Error",
+      message: null,
+      data: null,
     });
   }
 };
@@ -253,14 +307,19 @@ export const getTestExamByRank = async (req, res) => {
       return res.status(200).send({
         message: "OK",
         data: data,
+        error: null,
       });
     }
     return res.send({
       error: "No test exam for you :D",
+      message: null,
+      data: null,
     });
   } catch (error) {
     return res.status(400).send({
       error: error + " ,Bad Error",
+      message: null,
+      data: null,
     });
   }
 };

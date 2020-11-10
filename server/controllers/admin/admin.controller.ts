@@ -42,6 +42,8 @@ export const signUp = async (req, res) => {
       ))
     ) {
       return res.status(400).send({
+        message: null,
+        data: null,
         error: "Email or userName already exists",
       });
     }
@@ -49,13 +51,19 @@ export const signUp = async (req, res) => {
     // Check information
     const { value, error } = validateSignUp(body);
     if (error) {
-      return res.status(400).send(error);
+      return res.status(400).send({
+        error: error,
+        message: null,
+        data: null
+      });
     }
 
     // Check password
     if (validateConfirmPassword(body.password, body.confirmPassword) == false) {
       return res.status(400).send({
         error: "Invalid password",
+        message: null,
+        data: null
       });
     }
 
@@ -75,17 +83,23 @@ export const signUp = async (req, res) => {
           .then((doc) =>
             res.status(200).send({
               message: "Register successfully",
+              error: null,
+              data: null
             })
           )
           .catch((err) =>
             res.status(400).send({
               error: "Invalid _id",
+              message: null,
+              data: null
             })
           );
       });
   } catch (error) {
     res.status(400).send({
       error: error,
+      data: null,
+      message: null
     });
   }
 };
@@ -102,6 +116,8 @@ export const login = async (req, res) => {
     if (error) {
       return res.status(400).send({
         error: error,
+        message: null,
+        data: null
       });
     }
 
@@ -150,28 +166,38 @@ export const login = async (req, res) => {
         );
 
         return res.status(200).send({
-          token: accessToken,
-          refeshTokenStatus: await updateRefeshToken(
-            db,
-            firebaseHelper,
-            collectionName,
-            queryAdminUser._id,
-            refreshToken
-          ),
+          data: {
+            token: accessToken,
+            refeshTokenStatus: await updateRefeshToken(
+              db,
+              firebaseHelper,
+              collectionName,
+              queryAdminUser._id,
+              refreshToken
+            ),
+          },
+          message: null,
+          error: null
         });
       } else {
         res.status(400).send({
           error: "Password is wrong",
+          message: null,
+          data: null
         });
       }
     } else {
       res.send({
         error: "Account is not exist",
+        message: null,
+        data: null
       });
     }
   } catch (error) {
     res.status(400).send({
       error: error + ", Bad Error",
+      message: null,
+      data: null
     });
   }
 };
@@ -182,11 +208,14 @@ export const logedIn = async (req, res) => {
     if (error) {
       return res.status(400).send({
         error: "Invalid token",
+        message: null,
+        data: null
       });
     } else {
       return res.status(200).send({
         message: "Workout",
         data: adminData,
+        error: null
       });
     }
   });

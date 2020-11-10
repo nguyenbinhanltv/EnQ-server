@@ -17,6 +17,7 @@ export interface User {
   point: number | 0; //number
   testExamHistory?: Array<TestExamHistory>; //Maximum 5
   friend?: Array<{_id: string}> // _id of User
+  timeCreate: string;
 }
 
 /**
@@ -30,6 +31,7 @@ const user: User = {
     "https://lh3.googleusercontent.com/a-/AOh14GhLWdM4dY2PkM6RHZAZQF5BZmEnKkpegZGH99ub=s96-c",
   rank: 0,
   point: 0,
+  timeCreate: Date.now().toString(),
   testExamHistory: [
     {
       timeStart: Date.now(),
