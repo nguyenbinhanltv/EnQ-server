@@ -32,5 +32,6 @@ export {
   isAlreadyQuestion,
   getAllQuestionsByRank,
   getAllQuestionsByType,
-  getRandomQuestions
+  getRandomQuestions,
+  getAllQuestionsByTypeAndRank
 } from "./questions/questions.handler";

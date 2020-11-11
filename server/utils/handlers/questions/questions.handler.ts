@@ -58,6 +58,25 @@ export const getAllQuestionsByType = async (db, collectionName, type) => {
   return snapshot;
 };
 
+export const getAllQuestionsByTypeAndRank = async (db, collectionName, type, rank) => {
+  const questionsRef = db.collection(collectionName);
+  let snapshot = questionsRef.where("type", "==", type);
+  snapshot = snapshot.where("rank", "==", rank);
+
+  snapshot = snapshot
+    .get()
+    .then((querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      return data;
+    })
+    .then((querySnapshot) => querySnapshot)
+    .catch((err) => err);
+  return snapshot;
+};
+
 export const getRandomQuestions = (questions: Array<resQuestion>) => {
   let data: Array<resQuestion> = [];
   if (questions.length > 10) {

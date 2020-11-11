@@ -10,6 +10,7 @@ import {
   getAllQuestionsByRank,
   getAllQuestionsByType,
   getRandomQuestions,
+  getAllQuestionsByTypeAndRank,
 } from "../../utils/handlers/index";
 
 const collectionName = "questions";
@@ -293,10 +294,44 @@ export const getTestExamByType = async (req, res) => {
 };
 
 export const getTestExamByRank = async (req, res) => {
-  const rank: string = req.query.rank;
+  const rank: number = req.query.rank;
   const questions: Array<resQuestion> = await getAllQuestionsByRank(
     db,
     "questions",
+    rank
+  )
+    .then((data) => data)
+    .catch((err) => null);
+  try {
+    if (questions) {
+      let data = getRandomQuestions(questions);
+      return res.status(200).send({
+        message: "OK",
+        data: data,
+        error: null,
+      });
+    }
+    return res.send({
+      error: "No test exam for you :D",
+      message: null,
+      data: null,
+    });
+  } catch (error) {
+    return res.status(400).send({
+      error: error + " ,Bad Error",
+      message: null,
+      data: null,
+    });
+  }
+};
+
+export const getTestExamByTypeAndRank = async (req, res) => {
+  const rank: number = req.query.rank;
+  const type: number = req.query.type;
+  const questions: Array<resQuestion> = await getAllQuestionsByTypeAndRank(
+    db,
+    "questions",
+    type,
     rank
   )
     .then((data) => data)
