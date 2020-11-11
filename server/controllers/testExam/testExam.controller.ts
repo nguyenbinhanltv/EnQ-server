@@ -340,6 +340,7 @@ export const getTestExamByTypeAndRank = async (req, res) => {
   try {
     if (questions) {
       let data = getRandomQuestions(questions);
+      console.log(data);
 
       return await firebaseHelper.firestore
         .createNewDocument(db, "test-exam", {

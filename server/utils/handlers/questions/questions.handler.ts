@@ -79,7 +79,7 @@ export const getAllQuestionsByTypeAndRank = async (db, collectionName, type, ran
 
 export const getRandomQuestions = (questions: Array<resQuestion>) => {
   let data: Array<resQuestion> = [];
-  if (questions.length > 10) {
+  if (questions.length >= 10) {
     for (let i = 0; i < 10; i++) {
       data.push(questions[Math.floor(Math.random() * questions.length)]);
     }
