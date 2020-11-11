@@ -28,7 +28,7 @@ export const getLeadersDay = async (req, res) => {
       .checkDocumentExists(db, collectionName, leadersId)
       .then((result) => {
         if (result.exists) {
-          return res.status(400).send({
+          return res.status(200).send({
             message: "Leaders today already exist",
             data: result.data,
             error: null
@@ -137,7 +137,7 @@ export const getLeadersWeek = async (req, res) => {
       .then((doc) => doc)
       .catch((err) => null);
     if (isLeadersWeekAlreadyExist) {
-      return res.status(400).send({
+      return res.status(200).send({
         message: "Leaders week already exist",
         data: isLeadersWeekAlreadyExist,
         error: null

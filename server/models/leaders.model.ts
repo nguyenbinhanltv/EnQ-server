@@ -28,6 +28,8 @@ const leadersDay: Leaders = {
         "https://lh3.googleusercontent.com/a-/AOh14GhLWdM4dY2PkM6RHZAZQF5BZmEnKkpegZGH99ub=s96-c",
       rank: 0,
       point: 0,
+      timeCreate: Date.now().toString(),
+      friend: [],
     },
     // ...
   ],
@@ -48,6 +50,8 @@ const leadersWeek: Leaders = {
         "https://lh3.googleusercontent.com/a-/AOh14GhLWdM4dY2PkM6RHZAZQF5BZmEnKkpegZGH99ub=s96-c",
       rank: 0,
       point: 0,
+      timeCreate: Date.now().toString(),
+      friend: [],
     },
     // ...
   ],

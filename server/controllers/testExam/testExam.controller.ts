@@ -12,6 +12,7 @@ import {
   getRandomQuestions,
   getAllQuestionsByTypeAndRank,
 } from "../../utils/handlers/index";
+import { TestExam } from "models/test-exam.model";
 
 const collectionName = "questions";
 const db = admin.firestore();
@@ -339,12 +340,46 @@ export const getTestExamByTypeAndRank = async (req, res) => {
   try {
     if (questions) {
       let data = getRandomQuestions(questions);
-      return res.status(200).send({
-        message: "OK",
-        data: data,
-        error: null,
-      });
+
+      return await firebaseHelper.firestore
+        .createNewDocument(db, "test-exam", {
+          questions: data,
+          rank: rank,
+          type: type,
+        } as TestExam)
+        .then((doc) => {
+          firebaseHelper.firestore
+          .updateDocument(db, "test-exam", doc.id, {
+            _id: doc.id
+          })
+          .then()
+          .catch(err => 
+            res.status(400).send({
+            error: err,
+            message: null,
+            data: null,
+          }))
+
+          return res.status(200).send({
+            message: "OK",
+            data: {
+              _id: doc.id,
+              questions: data,
+              type: type,
+              rank: rank,
+            } as TestExam,
+            error: null,
+          });
+        })
+        .catch((err) =>
+          res.status(400).send({
+            error: err,
+            message: null,
+            data: null,
+          })
+        );
     }
+
     return res.send({
       error: "No test exam for you :D",
       message: null,
