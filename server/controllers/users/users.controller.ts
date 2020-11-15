@@ -69,14 +69,14 @@ export const updateUser = async (req, res) => {
   const body: User = req.body;
 
   try {
-    const { value, error } = validateUser(body);
-    if (error) {
-      return res.status(400).send({
-        error: error,
-        message: null,
-        data: null,
-      });
-    }
+    // const { value, error } = validateUser(body);
+    // if (error) {
+    //   return res.status(400).send({
+    //     error: error,
+    //     message: null,
+    //     data: null,
+    //   });
+    // }
 
     if (await isUserAlreadyExists(db, collectionName, body._id)) {
       return firebaseHelper.firestore

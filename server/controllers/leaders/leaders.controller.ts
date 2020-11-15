@@ -76,10 +76,10 @@ export const updateLeadersDay = async (req, res) => {
 
   try {
     // Check information leaders
-    const { value, error } = validateLeaders(body);
-    if (error) {
-      return res.status(400).send(error);
-    }
+    // const { value, error } = validateLeaders(body);
+    // if (error) {
+    //   return res.status(400).send(error);
+    // }
 
     firebaseHelper.firestore
       .checkDocumentExists(db, collectionName, body._id)
@@ -199,14 +199,14 @@ export const updateLeadersWeek = async (req, res) => {
 
   try {
     // Check information leaders
-    const { value, error } = validateLeaders(body);
-    if (error) {
-      return res.status(400).send({
-        error: error,
-        message: null,
-        data: null,
-      });
-    }
+    // const { value, error } = validateLeaders(body);
+    // if (error) {
+    //   return res.status(400).send({
+    //     error: error,
+    //     message: null,
+    //     data: null,
+    //   });
+    // }
 
     firebaseHelper.firestore
       .checkDocumentExists(db, collectionName, body._id)
