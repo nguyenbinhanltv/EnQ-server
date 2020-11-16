@@ -79,6 +79,27 @@ export const updateUser = async (req, res) => {
     // }
 
     if (await isUserAlreadyExists(db, collectionName, body._id)) {
+      if (body.testExamHistory.length > 0) {
+        let test = body.testExamHistory[0];
+        // let history = []
+        // for (let i = 0; i < test.length; i++) {
+          let testExam = []
+          for (let j = 0; j < test.testExam.questions.length; j++) {
+            testExam.push({
+              "question_id": test.testExam.questions[j]._id,
+              "answer": test.answers[j]
+            })
+          }
+          let history = {
+            "user_id": body._id,
+            "timeStart": test.timeStart,
+            "timeEnd": test.timeStart,
+            "test_id": test.testExam._id,
+            "question": testExam
+          }
+        // }
+        await firebaseHelper.firestore.createNewDocument(db, 'testHistory', history)
+      }
       return firebaseHelper.firestore
         .updateDocument(db, collectionName, body._id, body)
         .then((doc) =>
