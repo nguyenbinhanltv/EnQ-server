@@ -17,7 +17,7 @@ class UsersRoutes {
     this.routes.get("/", userController.getAllUsers)
     this.routes.get("/:userId", userController.getUser);
     this.routes.post("/", userController.createUser); // Create user data API
-    this.routes.patch("/:userId", userController.updateUser); // Update user data API
+    this.routes.post("/:userId", userController.updateUser); // Update user data API
     this.routes.delete("/:userId", userController.deleteUser);
     /**
      * @description
