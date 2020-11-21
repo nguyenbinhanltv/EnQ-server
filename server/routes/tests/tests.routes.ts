@@ -19,7 +19,7 @@ class TestExamRoute {
     //mobile
     this.routes.get("/test-exam-rank", testController.getTestExamByRank);
     this.routes.get("/test-exam-type", testController.getTestExamByType);
-    this.routes.get("/test-exam", testController.getTestExamByTypeAndRank);
+    this.routes.get("/test-exam", testController.getTestExamByTypeAndRank)
   }
 }
 
