@@ -6,18 +6,19 @@ interface TestExamHistory {
   timeEnd: number; //Date seconds
   testExam: TestExam;
   answers: Array<AnswerType>; //Array<Enum<A, B, C, D>>
+  point?:number;
 }
 
 export interface User {
-  displayName: string; //string name
-  email: string; //string gmail
-  _id?: string; //string
-  photoURL: string; //string
-  rank: number | 0; //number
-  point: number | 0; //number
+  displayName?: string; //string name
+  email?: string; //string gmail
+  _id: string; //string
+  photoURL?: string; //string
+  rank?: number | 0; //number
+  point?: number | 0; //number
   testExamHistory?: Array<TestExamHistory>; //Maximum 5
   friend?: Array<{_id: string}> // _id of User
-  timeCreate: string;
+  timeCreate?: string;
 }
 
 /**
