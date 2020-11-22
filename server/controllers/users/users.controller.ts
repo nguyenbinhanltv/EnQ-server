@@ -118,7 +118,7 @@ export const updateUser = async (req, res) => {
                 } else {
                     historyData.history.find(history => history._id == historyId).then((history)=>{
                         while (history.history[0]._id != history._id){
-                            history.history[0]._id = Math.floor(Math.random() * Math.floor(99999))
+                            history.history[0]._id = Math.floor(Math.random() * Math.floor(99999));
                         }
                     })
                     historyData.history.push(history.history[0])
