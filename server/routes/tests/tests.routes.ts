@@ -21,7 +21,7 @@ class TestExamRoute {
     this.routes.get("/test-exam-type", testController.getTestExamByType);
     this.routes.get("/test-exam", testController.getTestExamByTypeAndRank);
     this.routes.post('/history', testController.getHistory);
-    this.routes.post('/history/detail', testController.detailHistory);
+    this.routes.post('/history/detail', testController.detailHistory)
   }
 }
 
