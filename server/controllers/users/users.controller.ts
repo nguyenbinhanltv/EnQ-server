@@ -72,7 +72,6 @@ export const createUser = async (req, res) => {
 // Update 1 user in firestore
 export const updateUser = async (req, res) => {
         const body: User = req.body;
-        console.log(1)
         try {
             // const { value, error } = validateUser(body);
             // if (error) {
@@ -82,74 +81,75 @@ export const updateUser = async (req, res) => {
             //     data: null,
             //   });
             // }
-
-            if (await isUserAlreadyExists(db, collectionName, body._id)) {
-                if (body.testExamHistory.length > 0) {
-                    let user_id = body._id;
-                    let test = body.testExamHistory[0];
-                    // let history = []
-                    // for (let i = 0; i < test.length; i++) {
-                    let testExam = []
-                    for (let j = 0; j < test.testExam.questions.length; j++) {
-                        testExam.push({
-                            "question_id": test.testExam.questions[j]._id,
-                            "answer": test.answers[j]
-                        })
-
-                    }
-                    let history = {
-                        "history": [{
-                            "_id": Math.floor(Math.random() * Math.floor(99999)),
-                            "point": test.point,
-                            "user_id": user_id,
-                            "timeStart": test.timeStart,
-                            "timeEnd": test.timeStart,
-                            "test_id": test.testExam._id,
-                            "question": testExam
-                        }]
-                    }
-                    // }
-                    let historyId = Math.floor(Math.random() * Math.floor(99999))
-                    let historyRef = db.collection('test_history').doc(user_id)
-                    let historyData = await (await historyRef.get()).data()
-                    if (!historyData) {
-                        history.history[0]._id = historyId
-                        await historyRef.set(history);
-                    } else {
-                        historyData.history.find(history => history._id == historyId).then((history) => {
-                            while (history.history[0]._id != history._id) {
-                                history.history[0]._id = Math.floor(Math.random() * Math.floor(99999))
-                            }
-                        })
-                        historyData.history.push(history.history[0])
-                        await historyRef.update(historyData)
-                    }
-                }
-
-                return firebaseHelper.firestore
-                    .updateDocument(db, collectionName, body._id, body)
-                    .then((doc) =>
-                        res.status(200).send({
-                            message: `Update user ${body._id}:${body.email} successfully`,
-                            error: null,
-                            data: null,
-                        })
-                    )
-                    .catch((err) =>
-                        res.status(400).send({
-                            error: err,
-                            message: null,
-                            data: null,
-                        })
-                    );
-
-            } else {
-                res.status(400).send({
+            let user = (await firebaseHelper.firestore.checkDocumentExists(db, collectionName, body._id)).data
+            if (!user) {
+                return res.status(400).send({
                     error: "This user doesn't exist",
                     message: null,
                     data: null,
                 });
             }
+            if (body.testExamHistory.length > 0) {
+                let user_id = body._id;
+                let test = body.testExamHistory[0];
+                body.point = user.point + test.point
+
+                // let history = []
+                // for (let i = 0; i < test.length; i++) {
+                let testExam = []
+                for (let j = 0; j < test.testExam.questions.length; j++) {
+                    testExam.push({
+                        "question_id": test.testExam.questions[j]._id,
+                        "answer": test.answers[j]
+                    })
+
+                }
+                let history = {
+                    "history": [{
+                        "_id": Math.floor(Math.random() * Math.floor(99999)),
+                        "point": test.point,
+                        "user_id": user_id,
+                        "timeStart": test.timeStart,
+                        "timeEnd": test.timeStart,
+                        "test_id": test.testExam._id,
+                        "question": testExam
+                    }]
+                }
+                // }
+
+                let historyId = Math.floor(Math.random() * Math.floor(99999))
+                let historyRef = db.collection('test_history').doc(user_id)
+                let historyData = await (await historyRef.get()).data()
+                if (!historyData) {
+                    history.history[0]._id = historyId
+                    await historyRef.set(history);
+                } else {
+                    historyData.history.find(history => history._id == historyId).then((history) => {
+                        while (history.history[0]._id != history._id) {
+                            history.history[0]._id = Math.floor(Math.random() * Math.floor(99999))
+                        }
+                    })
+                    historyData.history.push(history.history[0])
+                    await historyRef.update(historyData)
+                }
+            }
+            return firebaseHelper.firestore
+                .updateDocument(db, collectionName, body._id, body)
+                .then((doc) =>
+                    res.status(200).send({
+                        message: `Update user ${body._id}:${body.email} successfully`,
+                        error: null,
+                        data: null,
+                    })
+                )
+                .catch((err) =>
+                    res.status(400).send({
+                        error: err,
+                        message: null,
+                        data: null,
+                    })
+                );
+
         } catch
             (error) {
             console.log(error)
@@ -213,7 +213,6 @@ export const deleteUser = async (req, res) => {
 // Get 1 user in firestore
 export const getUser = async (req, res) => {
     const userId = req.params.userId;
-
     try {
         // Body doesn't has userId
         if (userId == undefined) {
