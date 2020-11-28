@@ -71,6 +71,7 @@ export const createUser = async (req, res) => {
 
 // Update 1 user in firestore
 export const updateUser = async (req, res) => {
+    // return res.send('1')
         const body = req.body;
         try {
             // const { value, error } = validateUser(body);
@@ -116,7 +117,7 @@ export const updateUser = async (req, res) => {
                     }]
                 }
                 // }
-
+                console.log(user_id)
                 let historyId = Math.floor(Math.random() * Math.floor(99999))
                 let historyRef = db.collection('test_history').doc(user_id)
                 let historyData = await (await historyRef.get()).data()
@@ -124,11 +125,13 @@ export const updateUser = async (req, res) => {
                     history.history[0]._id = historyId
                     await historyRef.set(history);
                 } else {
-                    historyData.history.find(history => history._id == historyId).then((history) => {
-                        while (history.history[0]._id != history._id) {
+                    console.log(historyData)
+                    let duplicate = historyData.history.find(history => history._id == historyId)
+                    if (duplicate){
+                        while (history.history[0]._id != duplicate._id) {
                             history.history[0]._id = Math.floor(Math.random() * Math.floor(99999))
                         }
-                    })
+                    }
                     historyData.history.push(history.history[0])
                     await historyRef.update(historyData)
                 }
