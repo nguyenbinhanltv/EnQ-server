@@ -71,7 +71,7 @@ export const createUser = async (req, res) => {
 
 // Update 1 user in firestore
 export const updateUser = async (req, res) => {
-        const body: User = req.body;
+        const body = req.body;
         try {
             // const { value, error } = validateUser(body);
             // if (error) {
