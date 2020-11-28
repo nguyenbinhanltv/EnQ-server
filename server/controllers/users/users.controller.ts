@@ -1,10 +1,10 @@
 // Firebase
 import * as admin from "firebase-admin";
 import * as firebaseHelper from "firebase-functions-helper/dist";
-import {merge} from "lodash";
+import { merge } from "lodash";
 
 // Model
-import {User} from "../../models/user.model";
+import { User } from "../../models/user.model";
 
 // Handlers
 import {
@@ -12,7 +12,7 @@ import {
     isUserAlreadyExists,
     validateUser,
 } from "../../utils/handlers/index";
-import {firestore} from "firebase-admin";
+import { firestore } from "firebase-admin";
 
 const db = admin.firestore();
 const collectionName = "users";
@@ -31,7 +31,7 @@ export const createUser = async (req, res) => {
         }
 
         // Check validate body
-        const {value, error} = validateUser(body);
+        const { value, error } = validateUser(body);
         if (error) {
             return res.status(400).send({
                 error: error,
@@ -46,17 +46,17 @@ export const createUser = async (req, res) => {
                 res.status(201).send({
                     message: "Register successfully",
                     error: null,
-                    data: {user_id: doc.id},
+                    data: { user_id: doc.id },
                 })
             )
             .catch((err) => {
-                    console.log(err)
-                    res.status(400).send({
-                        error: err,
-                        message: null,
-                        data: null,
-                    })
-                }
+                console.log(err)
+                res.status(400).send({
+                    error: err,
+                    message: null,
+                    data: null,
+                })
+            }
             );
     } catch (error) {
         console.log(error)
@@ -72,98 +72,98 @@ export const createUser = async (req, res) => {
 // Update 1 user in firestore
 export const updateUser = async (req, res) => {
     // return res.send('1')
-        const body = req.body;
-        try {
-            // const { value, error } = validateUser(body);
-            // if (error) {
-            //   return res.status(400).send({
-            //     error: error,
-            //     message: null,
-            //     data: null,
-            //   });
-            // }
-            let user = (await firebaseHelper.firestore.checkDocumentExists(db, collectionName, body._id)).data
-            if (!user) {
-                return res.status(400).send({
-                    error: "This user doesn't exist",
-                    message: null,
-                    data: null,
-                });
-            }
-            if (body.testExamHistory.length > 0) {
-                let user_id = body._id;
-                let test = body.testExamHistory[0];
-                body.point = user.point + test.point
-
-                // let history = []
-                // for (let i = 0; i < test.length; i++) {
-                let testExam = []
-                for (let j = 0; j < test.testExam.questions.length; j++) {
-                    testExam.push({
-                        "question_id": test.testExam.questions[j]._id,
-                        "answer": test.answers[j]
-                    })
-
-                }
-                let history = {
-                    "history": [{
-                        "_id": Math.floor(Math.random() * Math.floor(99999)),
-                        "point": test.point,
-                        "user_id": user_id,
-                        "timeStart": test.timeStart,
-                        "timeEnd": test.timeStart,
-                        "test_id": test.testExam._id,
-                        "question": testExam
-                    }]
-                }
-                // }
-                console.log(user_id)
-                let historyId = Math.floor(Math.random() * Math.floor(99999))
-                let historyRef = db.collection('test_history').doc(user_id)
-                let historyData = await (await historyRef.get()).data()
-                if (!historyData) {
-                    history.history[0]._id = historyId
-                    await historyRef.set(history);
-                } else {
-                    console.log(historyData)
-                    let duplicate = historyData.history.find(history => history._id == historyId)
-                    if (duplicate){
-                        while (history.history[0]._id != duplicate._id) {
-                            history.history[0]._id = Math.floor(Math.random() * Math.floor(99999))
-                        }
-                    }
-                    historyData.history.push(history.history[0])
-                    await historyRef.update(historyData)
-                }
-            }
-            return firebaseHelper.firestore
-                .updateDocument(db, collectionName, body._id, body)
-                .then((doc) =>
-                    res.status(200).send({
-                        message: `Update user ${body._id}:${body.email} successfully`,
-                        error: null,
-                        data: null,
-                    })
-                )
-                .catch((err) =>
-                    res.status(400).send({
-                        error: err,
-                        message: null,
-                        data: null,
-                    })
-                );
-
-        } catch
-            (error) {
-            console.log(error)
-            res.status(400).send({
-                error: error + ", Bad Error",
+    const body = req.body;
+    try {
+        // const { value, error } = validateUser(body);
+        // if (error) {
+        //   return res.status(400).send({
+        //     error: error,
+        //     message: null,
+        //     data: null,
+        //   });
+        // }
+        let user = (await firebaseHelper.firestore.checkDocumentExists(db, collectionName, body._id)).data
+        if (!user) {
+            return res.status(400).send({
+                error: "This user doesn't exist",
                 message: null,
                 data: null,
             });
         }
+        if (body.testExamHistory.length > 0) {
+            let user_id = body._id;
+            let test = body.testExamHistory[0];
+            body.point = user.point + test.point
+
+            // let history = []
+            // for (let i = 0; i < test.length; i++) {
+            let testExam = []
+            for (let j = 0; j < test.testExam.questions.length; j++) {
+                testExam.push({
+                    "question_id": test.testExam.questions[j]._id,
+                    "answer": test.answers[j]
+                })
+
+            }
+            let history = {
+                "history": [{
+                    "_id": Math.floor(Math.random() * Math.floor(99999)),
+                    "point": test.point,
+                    "user_id": user_id,
+                    "timeStart": test.timeStart,
+                    "timeEnd": test.timeStart,
+                    "test_id": test.testExam._id,
+                    "question": testExam
+                }]
+            }
+            // }
+            console.log(user_id)
+            let historyId = Math.floor(Math.random() * Math.floor(99999))
+            let historyRef = db.collection('test_history').doc(user_id)
+            let historyData = await (await historyRef.get()).data()
+            if (!historyData) {
+                history.history[0]._id = historyId
+                await historyRef.set(history);
+            } else {
+                console.log(historyData)
+                let duplicate = historyData.history.find(history => history._id == historyId)
+                if (duplicate) {
+                    while (history.history[0]._id != duplicate._id) {
+                        history.history[0]._id = Math.floor(Math.random() * Math.floor(99999));
+                    }
+                }
+                historyData.history.push(history.history[0]);
+                await historyRef.update(historyData);
+            }
+        }
+        return firebaseHelper.firestore
+            .updateDocument(db, collectionName, body._id, body)
+            .then((doc) =>
+                res.status(200).send({
+                    message: `Update user ${body._id}:${body.email} successfully`,
+                    error: null,
+                    data: null,
+                })
+            )
+            .catch((err) =>
+                res.status(400).send({
+                    error: err,
+                    message: null,
+                    data: null,
+                })
+            );
+
+    } catch
+    (error) {
+        console.log(error)
+        res.status(400).send({
+            error: error + ", Bad Error",
+            message: null,
+            data: null,
+        });
     }
-;
+}
+    ;
 
 // Delete 1 user in firestore
 export const deleteUser = async (req, res) => {
