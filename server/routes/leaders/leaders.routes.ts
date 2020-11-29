@@ -15,7 +15,7 @@ class LeadersRoutes {
     this.routes.get("/day", leadersController.getLeadersDay);
     this.routes.patch("/day", leadersController.updateLeadersDay);
     this.routes.get("/week", leadersController.getLeadersWeek);
-    this.routes.patch("/week", leadersController.getLeadersWeek);
+    this.routes.patch("/week", leadersController.updateLeadersWeek);
   }
 }
 
