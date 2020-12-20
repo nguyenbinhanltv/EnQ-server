@@ -327,72 +327,71 @@ export const getTestExamByRank = async (req, res) => {
 };
 
 export const getTestExamByTypeAndRank = async (req, res) => {
-    const rank: number = req.query.rank;
-    const type: number = req.query.type;
-    const questions: Array<resQuestion> = await getAllQuestionsByTypeAndRank(
-        db,
-        "questions",
-        type,
-        rank
-    )
-        .then((data) => data)
-        .catch((err) => null);
-    try {
-        if (questions) {
-            let data = getRandomQuestions(questions);
+  const rank: number = req.query.rank;
+  const type: number = req.query.type;
+  const questions: Array<resQuestion> = await getAllQuestionsByTypeAndRank(
+      db,
+      "questions",
+      type,
+      rank
+  )
+      .then((data) => data)
+      .catch((err) => null);
+  try {
+      if (questions) {
+          let data = getRandomQuestions(questions);
 
-            return await firebaseHelper.firestore
-                .createNewDocument(db, "test-exam", {
-                    questions: data,
-                    rank: rank,
-                    type: type,
-                } as TestExam)
-                .then((doc) => {
-                    console.log(doc.id);
-                    firebaseHelper.firestore
-                        .updateDocument(db, "test-exam", doc.id, {
-                            _id: doc.id
-                        })
-                        .then()
-                        .catch(err =>
-                            res.status(400).send({
-                                error: err,
-                                message: null,
-                                data: null,
-                            }))
+          return await firebaseHelper.firestore
+              .createNewDocument(db, "test-exam", {
+                  questions: data,
+                  rank: rank,
+                  type: type,
+              } as TestExam)
+              .then((doc) => {
+                  firebaseHelper.firestore
+                      .updateDocument(db, "test-exam", doc.id, {
+                          _id: doc.id
+                      })
+                      .then()
+                      .catch(err =>
+                          res.status(400).send({
+                              error: err,
+                              message: null,
+                              data: null,
+                          }))
 
-                    return res.status(200).send({
-                        message: "OK",
-                        data: {
-                            _id: doc.id,
-                            questions: data,
-                            type: type,
-                            rank: rank,
-                        } as TestExam,
-                        error: null,
-                    });
-                })
-                .catch((err) =>
-                    res.status(400).send({
-                        error: err,
-                        message: null,
-                        data: null,
-                    })
-                );
-        }
+                  return res.status(200).send({
+                      message: "OK",
+                      data: {
+                          _id: doc.id,
+                          questions: data,
+                          type: type,
+                          rank: rank,
+                      } as TestExam,
+                      error: null,
+                  });
+              })
+              .catch((err) =>
+                  res.status(400).send({
+                      error: err,
+                      message: null,
+                      data: null,
+                  })
+              );
+      }
 
-        return res.send({
-            error: "No test exam for you :D",
-            message: null,
-            data: null,
-        });
-    } catch (error) {
-        return res.status(400).send({
-            error: error + " ,Bad Error",
-            message: null,
-            data: null,
-        });
-    }
+      return res.send({
+          error: "No test exam for you :D",
+          message: null,
+          data: null,
+      });
+  } catch (error) {
+      return res.status(400).send({
+          error: error + " ,Bad Error",
+          message: null,
+          data: null,
+      });
+  }
 };
 
 export const getHistory = async (req, res) => {

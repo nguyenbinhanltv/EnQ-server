@@ -1,7 +1,8 @@
 import * as admin from "firebase-admin";
 import * as Joi from "joi";
+import { result } from "lodash";
 import { resQuestion } from "../../../models/question.model";
-import { pick, inRange } from "../../common";
+import { pick, inRange, clone, remove } from "../../common";
 
 export const validateQuestion = (body) => {
   const schema = Joi.object().keys({
@@ -78,10 +79,17 @@ export const getAllQuestionsByTypeAndRank = async (db, collectionName, type, ran
 };
 
 export const getRandomQuestions = (questions: Array<resQuestion>) => {
+  let cloneQuestions: Array<resQuestion> = [...questions];
   let data: Array<resQuestion> = [];
-  if (questions.length >= 10) {
-    for (let i = 0; i < 10; i++) {
-      data.push(questions[Math.floor(Math.random() * questions.length)]);
+  if (cloneQuestions.length >= 10) {
+    while (data.length < 10) {
+      let random = Math.floor(Math.random() * questions.length);
+      let pick = cloneQuestions[random];
+      if (pick != null) {
+        data.push(pick);
+      }
+
+      cloneQuestions[random] = null;
     }
   }
 
