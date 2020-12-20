@@ -395,8 +395,10 @@ export const getTestExamByTypeAndRank = async (req, res) => {
 };
 
 export const getHistory = async (req, res) => {
-    let isRecent = req.body.isRecent
+    let isRecent = req.body.isRecent || req.body.is_recent;
     let user_id = req.body.user_id;
+    let resHistoryData = [];
+
     if (!user_id) {
         return res.status(400).send({
             error: "User Id không hợp lệ",
@@ -404,9 +406,10 @@ export const getHistory = async (req, res) => {
             data: null
         })
     }
+
     let historyRef = db.collection('test_history').doc(user_id)
     let historyData = await historyRef.get().then(doc => {
-        return doc.data()
+        return doc.data();
     })
 
 
@@ -419,26 +422,28 @@ export const getHistory = async (req, res) => {
     }
     historyData = historyData.history
     let limit = historyData.length
+
     if (isRecent) {
-        historyData.sort(function (a, b) {
-            return (a.timeEnd - b.timeEnd)
-        })
         limit = 3
-    } else {
-        historyData.sort(function (a, b) {
-            return (a.point - b.point);
-        })
     }
-    // console.log(historyData)
+
+    historyData.sort(function (a, b) {
+        a.timeEnd = new Date(a.timeEnd);
+        b.timeEnd = new Date(b.timeEnd);
+        return (b.timeEnd - a.timeEnd);
+    })
+
     for (let i = 0; i < limit; i++) {
         // console.log(typeof historyData[i].timeStart)
-        historyData[i].timeStart = new Date(historyData[i].timeStart).toLocaleString()
-        historyData[i].timeEnd = new Date(historyData[i].timeEnd).toLocaleString()
+        historyData[i].timeStart = new Date(historyData[i].timeStart).toLocaleString();
+        historyData[i].timeEnd = new Date(historyData[i].timeEnd).toLocaleString();
+        resHistoryData.push(historyData[i]);
     }
+
     return res.status(200).send({
         error: null,
         message: null,
-        data: historyData
+        data: resHistoryData
     })
 }
 
