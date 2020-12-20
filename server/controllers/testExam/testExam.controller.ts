@@ -348,7 +348,6 @@ export const getTestExamByTypeAndRank = async (req, res) => {
                   type: type,
               } as TestExam)
               .then((doc) => {
-                  console.log(doc.id);
                   firebaseHelper.firestore
                       .updateDocument(db, "test-exam", doc.id, {
                           _id: doc.id
